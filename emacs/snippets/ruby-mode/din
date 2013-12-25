@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: init function
+# --
+def initialize${1:(${2:args})}
+  $0
+end
