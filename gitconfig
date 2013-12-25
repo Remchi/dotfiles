@@ -1,0 +1,44 @@
+[user]
+	name = Rem Zolotykh
+	email = remchi@gmail.com
+[color]
+  diff = auto
+  status = auto
+  branch = auto
+  interactive = auto
+  ui = auto
+[gc]
+  auto = 1
+[alias]
+  st = status
+  cm = commit -m
+  co = checkout
+  di = diff
+  dc = diff --cached
+  ds = diff --staged
+  aa = add --all
+  pom = push origin master
+  b = branch
+
+  unstage = reset HEAD            # un-add files from index (tracking)
+  uncommit = reset --soft HEAD^   # go back one commit, put changes into your working dir and index
+
+[format]
+  pretty=format:%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset
+
+[merge]
+  tool = vimdiff
+  summary = true
+[core]
+	editor = vim
+	excludesfile = /Users/remchi/.gitignore_global
+[credential]
+	helper = osxkeychain
+[push]
+	default = simple
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
