@@ -20,7 +20,7 @@
 (delete-selection-mode t)
 (blink-cursor-mode t)
 (show-paren-mode t)
-(setq make-backup-file nil)
+(setq backup-directory-alist `(("." . "~/.saves")))
 (setq auto-save-default nil)
 (setq inhibit-startup-message t)
 (setq-default tab-width 2)
