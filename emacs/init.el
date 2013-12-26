@@ -129,6 +129,9 @@
 (require 'auto-complete-config)
 (ac-config-default)
 
+;; SCSS MODE
+(setq scss-compile-at-save nil)
+
 
 ;; ==================================================
 ;;              CUSTOM FUNCTIONS

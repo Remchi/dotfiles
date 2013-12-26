@@ -13,3 +13,4 @@
 (depends-on "emmet-mode")
 (depends-on "markdown-mode")
 (depends-on "magit")
+(depends-on "scss-mode")
