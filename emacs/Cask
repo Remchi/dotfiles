@@ -14,3 +14,4 @@
 (depends-on "markdown-mode")
 (depends-on "magit")
 (depends-on "scss-mode")
+(depends-on "htmlize")
