@@ -57,6 +57,9 @@
 (add-hook 'html-mode-hook 'emmet-mode)
 (add-hook 'web-mode-hook 'emmet-mode)
 
+;; ORG mode
+(add-to-list 'auto-mode-alist '("\\.txt\\'" . org-mode))
+
 
 ;; ==================================================
 ;;             REMCHI MODE MAPPINGS
