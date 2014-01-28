@@ -1,0 +1,25 @@
+## I Rock App
+
+Every day can be awesome, because you achieve something. But very often we do not celebrate our achievements. Instead we concentrate on failures or new goals. *I Rock App* wants to change this to create a space where you can log your awesomeness and share it with your friends and the world.
+
+It's a great feeling to come back to your achievements diary after a year and see how much you've actually done!
+
+## Goal of the project
+
+The basic idea is to create live and real project which can serve in educational purposes as well. The problem with screencasts and courses I do now is that they use artificial example applications which are never really deployed to production and used by real users. But skill is gained mostly when one work with real project and solves real problems.
+
+So I thought why not to create a real app and document the process of its development with all errors, bad and good decisions, etc. on the way?
+
+These are the main points of this project:
+
+- this application is the one that I’m going to use by myself so I’m interested to push it to production as soon as possible
+- **the first phase** is to develop Minimal Valuable Product (MVP) which can be used by me and clients
+- **the second phase** is to deploy it and to gather some user pool about 10-50 active users so the project can get real feedback – no need to develop something that may be not used at all
+- the project is going to be open source so anybody can contribute or learn from it
+- gather several active developers to work on this project and have fun
+
+You can follow the development process on by blog: http://remchi.me.
+
+## License
+
+Copyright (c) 2014 Rem Zolotykh. MIT License.
