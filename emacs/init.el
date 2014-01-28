@@ -45,6 +45,7 @@
 
 ;; Ruby
 (add-to-list 'auto-mode-alist '("Gemfile\\'" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Guardfile\\'" . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.gemspec\\'" . ruby-mode))
 
 ;; Web-mode
@@ -84,7 +85,7 @@
 (define-key remchi-mode-map (kbd "M-l") 'select-current-line)
 (define-key remchi-mode-map (kbd "M-RET") 'line-above)
 (define-key remchi-mode-map (kbd "C-S-y") 'duplicate-current-line-or-region)
-(global-set-key (kbd "M-'") 'create-snippet)
+(define-key remchi-mode-map (kbd "M-'") 'create-snippet)
 (define-key remchi-mode-map (kbd "C-c r") 'rename-this-buffer-and-file)
 
 ;; PROJECTILE and HELM
@@ -134,6 +135,11 @@
 
 ;; SCSS MODE
 (setq scss-compile-at-save nil)
+(setq css-indent-offset 2)
+
+
+;; JS MODE
+(setq js-indent-level 2)
 
 
 ;; ==================================================
@@ -243,6 +249,7 @@ there's a region, all lines that region covers will be duplicated."
 (setq org-agenda-custom-commands
       '(("d" todo "DOING")))
 (setq org-log-done 'time)
+(setq org-startup-folded 'showeverything)
 
 
 ;; ==================================================
@@ -254,7 +261,8 @@ there's a region, all lines that region covers will be duplicated."
  ;; If there is more than one, they won't work right.
  '(ansi-color-names-vector ["#212526" "#ff4b4b" "#b4fa70" "#fce94f" "#729fcf" "#ad7fa8" "#8cc4ff" "#eeeeec"])
  '(custom-enabled-themes (quote (sanityinc-tomorrow-eighties)))
- '(custom-safe-themes (quote ("628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" default))))
+ '(custom-safe-themes (quote ("628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" default)))
+ '(ido-ignore-directories (quote ("\\`CVS/" "\\`\\.\\./" "\\`\\./" "\\'node_modules/"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
