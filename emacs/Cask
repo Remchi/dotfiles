@@ -16,3 +16,4 @@
 (depends-on "scss-mode")
 (depends-on "htmlize")
 (depends-on "angular-snippets")
+(depends-on "multiple-cursors")

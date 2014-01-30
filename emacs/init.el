@@ -91,6 +91,17 @@
 ;; PROJECTILE and HELM
 (global-set-key (kbd "C-c h") 'helm-projectile)
 
+;; WINDMOVE
+(define-key remchi-mode-map (kbd "C-M-n")  'windmove-left)
+(define-key remchi-mode-map (kbd "C-M-i") 'windmove-right)
+(define-key remchi-mode-map (kbd "C-M-u")    'windmove-up)
+(define-key remchi-mode-map (kbd "C-M-e")  'windmove-down)
+
+;; MULTIPLE CURSORS
+(define-key remchi-mode-map (kbd "C-'")  'mc/mark-next-like-this)
+(define-key remchi-mode-map (kbd "C-\"")  'mc/mark-previous-like-this)
+
+
 ;; ==================================================
 ;;             GLOBAL MAPPINGS
 ;; ==================================================
