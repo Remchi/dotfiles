@@ -17,3 +17,4 @@
 (depends-on "htmlize")
 (depends-on "angular-snippets")
 (depends-on "multiple-cursors")
+(depends-on "yaml-mode")
