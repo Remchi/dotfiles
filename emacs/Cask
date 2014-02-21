@@ -18,3 +18,6 @@
 (depends-on "angular-snippets")
 (depends-on "multiple-cursors")
 (depends-on "yaml-mode")
+(depends-on "ruby-refactor")
+(depends-on "flatland-theme")
+(depends-on "powerline")

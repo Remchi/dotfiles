@@ -61,6 +61,10 @@
 ;; ORG mode
 (add-to-list 'auto-mode-alist '("\\.txt\\'" . org-mode))
 
+;; Ruby refactor
+(add-hook 'ruby-mode-hook 'ruby-refactor-mode-launch)
+(setq ruby-refactor-add-parens 1)
+
 
 ;; ==================================================
 ;;             REMCHI MODE MAPPINGS
@@ -232,6 +236,42 @@ there's a region, all lines that region covers will be duplicated."
                (message "File '%s' successfully renamed to '%s'" name (file-name-nondirectory new-name))))))))
 
 
+;; Running Rspec tests:
+;; http://crypt.codemancers.com/posts/2013-03-28-poor-mans-rspec-mode-for-emacs/
+
+(require 'compile)
+;; Find root directory by searching for Gemfile
+(defun* get-closest-gemfile-root (&optional (file "Gemfile"))
+  (let ((root (expand-file-name "/")))
+    (loop 
+     for d = default-directory then (expand-file-name ".." d)
+     if (file-exists-p (expand-file-name file d))
+     return d
+     if (equal d root)
+     return nil)))
+
+(defun rspec-compile-file ()
+  (interactive)
+  (compile (format "cd %s;bundle exec rspec %s"
+                   (get-closest-gemfile-root)
+                   (file-relative-name (buffer-file-name) (get-closest-gemfile-root))
+                   ) t))
+
+(defun rspec-compile-on-line ()
+  (interactive)
+  (compile (format "cd %s;bundle exec rspec %s -l %s"
+                   (get-closest-gemfile-root)
+                   (file-relative-name (buffer-file-name) (get-closest-gemfile-root))
+                   (line-number-at-pos)
+                   ) t))
+
+(add-hook 'ruby-mode-hook
+          (lambda ()
+            (local-set-key (kbd "C-c l") 'rspec-compile-on-line)
+            (local-set-key (kbd "C-c k") 'rspec-compile-file)
+            ))
+
+
 ;; ==================================================
 
 ;; Define my own minor mode and activate it
@@ -265,6 +305,20 @@ there's a region, all lines that region covers will be duplicated."
 
 
 ;; ==================================================
+;;               APPEARENCE
+;; ==================================================
+(load-theme 'flatland t)
+
+
+(powerline-default-theme)
+(setq powerline-color1 "gray30")
+(setq powerline-color2 "gray45")
+(set-face-attribute 'mode-line nil
+                    :background "gray22"
+                    :foreground "F0DFAF"
+                    :box nil)
+
+;; ==================================================
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -272,8 +326,7 @@ there's a region, all lines that region covers will be duplicated."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ansi-color-names-vector ["#212526" "#ff4b4b" "#b4fa70" "#fce94f" "#729fcf" "#ad7fa8" "#8cc4ff" "#eeeeec"])
- '(custom-enabled-themes (quote (sanityinc-tomorrow-eighties)))
- '(custom-safe-themes (quote ("628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" default)))
+ '(custom-safe-themes (quote ("86f4407f65d848ccdbbbf7384de75ba320d26ccecd719d50239f2c36bec18628" "4ea594ee0eb3e5741ab7c4b3eeb36066f795c61aeebad843d74f0a28a81a0352" "a3d519ee30c0aa4b45a277ae41c4fa1ae80e52f04098a2654979b1ab859ab0bf" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" default)))
  '(ido-ignore-directories (quote ("\\`CVS/" "\\`\\.\\./" "\\`\\./" "\\'node_modules/"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
