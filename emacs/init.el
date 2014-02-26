@@ -47,6 +47,7 @@
 (add-to-list 'auto-mode-alist '("Gemfile\\'" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Guardfile\\'" . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.gemspec\\'" . ruby-mode))
+(add-to-list 'auto-mode-alist '("config.ru\\'" . ruby-mode))
 
 ;; Web-mode
 (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
@@ -302,7 +303,6 @@ there's a region, all lines that region covers will be duplicated."
       '(("d" todo "DOING")))
 (setq org-log-done 'time)
 (setq org-startup-folded 'showeverything)
-
 
 ;; ==================================================
 ;;               APPEARENCE
