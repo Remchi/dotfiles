@@ -1,5 +1,6 @@
 source '/usr/local/share/chruby/chruby.sh'
 source '/usr/local/share/chruby/auto.sh'
+chruby ruby
 
 export TERM=xterm-256color
 
