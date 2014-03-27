@@ -107,6 +107,9 @@
 (define-key remchi-mode-map (kbd "C-'")  'mc/mark-next-like-this)
 (define-key remchi-mode-map (kbd "C-\"")  'mc/mark-previous-like-this)
 
+;; MAGIT status
+(define-key remchi-mode-map (kbd "C-c C-t")  'magit-status)
+
 
 ;; ==================================================
 ;;             GLOBAL MAPPINGS
