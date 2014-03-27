@@ -21,3 +21,4 @@
 (depends-on "ruby-refactor")
 (depends-on "flatland-theme")
 (depends-on "powerline")
+(depends-on "rspec-mode")

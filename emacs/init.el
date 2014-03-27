@@ -320,6 +320,18 @@ there's a region, all lines that region covers will be duplicated."
                     :box nil)
 
 ;; ==================================================
+;;        Use BASH for Rspec-mode to work
+;; ==================================================
+
+(defadvice rspec-compile (around rspec-compile-around)
+  "Use BASH shell for running the specs because of ZSH issues."
+  (let ((shell-file-name "/bin/bash"))
+    ad-do-it))
+
+(ad-activate 'rspec-compile)
+
+;; ==================================================
+
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
