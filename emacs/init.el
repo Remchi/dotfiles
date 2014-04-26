@@ -39,6 +39,7 @@
   (tool-bar-mode -1))
 
 (global-auto-revert-mode 1)
+(setq ring-bell-function 'ignore)
 
 ;; ==================================================
 ;;               AUTO MODES
@@ -143,6 +144,7 @@
 (ido-everywhere 1)
 (flx-ido-mode 1)
 (setq ido-use-faces nil)
+(ido-vertical-mode 1)
 
 ;; SAVEPLACE
 (require 'saveplace)

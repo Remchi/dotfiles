@@ -22,3 +22,5 @@
 (depends-on "flatland-theme")
 (depends-on "powerline")
 (depends-on "rspec-mode")
+(depends-on "org-pomodoro")
+(depends-on "ido-vertical-mode")
