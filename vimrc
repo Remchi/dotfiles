@@ -15,6 +15,7 @@ Plugin 'tpope/vim-ragtag'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
 
+Plugin 'dhruvasagar/vim-vinegar'
 Plugin 'rbgrouleff/bclose.vim'
 Plugin 'bling/vim-airline'
 Plugin 'jiangmiao/auto-pairs'
@@ -57,6 +58,7 @@ set shiftwidth=2
 set softtabstop=2
 set expandtab
 set relativenumber
+set number
 set wrap
 set linebreak
 set hlsearch
@@ -105,7 +107,7 @@ let mapleader = ","
 map <Leader>e :e <C-R>=escape(expand("%:p:h"),' ') . '/'<CR>
 
 nnoremap <silent> <Space> :nohl<Bar>:echo<CR>
-nnoremap - mzyyp`zj
+nnoremap <leader>m mzyyp`zj
 nnoremap <leader>v :set invpaste paste?<CR>
 nnoremap <leader>V V`]
 nmap k gk
@@ -122,8 +124,6 @@ nnoremap <leader>gv :CommandT app/views<cr>
 nnoremap <leader>gc :CommandT app/controllers<cr>
 nnoremap <leader>gm :CommandT app/models<cr>
 nnoremap <leader>gf :CommandT app/feauters<cr>
-
-map <leader>q :NERDTreeToggle<CR>
 
 nnoremap <leader>t :call RunCurrentTest()<cr>
 nnoremap <leader>a :w<cr>:call ClearScreen()<cr>:!bin/rspec<cr>
