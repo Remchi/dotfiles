@@ -93,6 +93,7 @@ if has("autocmd")
 
     autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
 
+    autocmd BufRead,BufNewFile *.asc setfiletype asciidoc
 
   augroup END
 endif
@@ -154,8 +155,8 @@ let &t_AB="\e[48;5;%dm"
 let &t_AF="\e[38;5;%dm"
 
 " Making cursor a bar in insert mode
-let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+" let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+" let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 
 colorscheme smyck
 
