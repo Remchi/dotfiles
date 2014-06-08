@@ -22,6 +22,7 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'justinmk/vim-sneak'
 
 Plugin 'wincent/Command-T'
+Plugin 'SirVer/ultisnips'
 
 Plugin 'scrooloose/nerdtree'
 
