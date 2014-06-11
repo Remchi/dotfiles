@@ -14,6 +14,8 @@ Plugin 'tpope/vim-eunuch'
 Plugin 'tpope/vim-ragtag'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-fugitive'
+Plugin 'vim-ruby/vim-ruby'
 
 Plugin 'dhruvasagar/vim-vinegar'
 Plugin 'rbgrouleff/bclose.vim'
@@ -27,7 +29,8 @@ Plugin 'SirVer/ultisnips'
 Plugin 'scrooloose/nerdtree'
 
 Plugin 'AndrewRadev/splitjoin.vim'
-Plugin 'tommcdo/vim-lion'
+
+Plugin 'kchmck/vim-coffee-script'
 
 call vundle#end()
 filetype plugin indent on
@@ -105,6 +108,11 @@ endif
 
 let mapleader = ","
 
+" Quick open most used files
+nnoremap <leader>en :split ~/Dropbox/notes/inbox.asc<cr>
+nnoremap <leader>ev :split ~/.vimrc<cr>
+nnoremap <leader>es :split<cr>:UltiSnipsEdit<cr>
+
 " create/open file in current folder
 map <Leader>e :e <C-R>=escape(expand("%:p:h"),' ') . '/'<CR>
 
@@ -121,6 +129,7 @@ noremap <Leader>D :bufdo bd<CR>
 cnoremap %% <C-R>=expand("%:p:h") . "/" <CR>
 
 nnoremap <leader>f :CommandT<cr>
+nnoremap <leader>p :CommandTFlush<cr>
 nnoremap <leader>. :CommandTBuffer<cr>
 nnoremap <leader>gv :CommandT app/views<cr>
 nnoremap <leader>gc :CommandT app/controllers<cr>
@@ -131,6 +140,7 @@ nnoremap <leader>t :call RunCurrentTest()<cr>
 nnoremap <leader>a :w<cr>:call ClearScreen()<cr>:!bin/rspec<cr>
 nnoremap <leader>c :w<cr>:call ClearScreen()<cr>:!bin/cucumber<cr>
 
+nnoremap <leader>gs :Gstatus<CR><C-w>20+
 
 " =============================================================
 "                 PLUGINS CONFIGURATION
