@@ -17,8 +17,8 @@ Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-rails'
 Plugin 'vim-ruby/vim-ruby'
+Plugin 'tpope/vim-vinegar'
 
-Plugin 'dhruvasagar/vim-vinegar'
 Plugin 'rbgrouleff/bclose.vim'
 Plugin 'bling/vim-airline'
 Plugin 'jiangmiao/auto-pairs'
@@ -29,9 +29,12 @@ Plugin 'SirVer/ultisnips'
 
 Plugin 'scrooloose/nerdtree'
 
-Plugin 'AndrewRadev/splitjoin.vim'
-
 Plugin 'kchmck/vim-coffee-script'
+Plugin 'pangloss/vim-javascript'
+
+Plugin 'godlygeek/tabular'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'tomtom/tcomment_vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -79,6 +82,7 @@ set winminheight=5
 set winheight=999
 set noswapfile
 set wildmenu
+set nostartofline
 " (Hopefully) removes the delay when hitting esc in insert mode
 set noesckeys
 set ttimeout
@@ -132,16 +136,19 @@ cnoremap %% <C-R>=expand("%:p:h") . "/" <CR>
 nnoremap <leader>f :CommandT<cr>
 nnoremap <leader>p :CommandTFlush<cr>
 nnoremap <leader>. :CommandTBuffer<cr>
-nnoremap <leader>gv :CommandT app/views<cr>
+nnoremap <leader>w :CommandT app/assets/javascripts<cr>
 nnoremap <leader>gc :CommandT app/controllers<cr>
+nnoremap <leader>gv :CommandT app/views<cr>
 nnoremap <leader>gm :CommandT app/models<cr>
-nnoremap <leader>gf :CommandT app/feauters<cr>
+nnoremap <leader>gs :CommandT app/services<cr>
+nnoremap <leader>gr :CommandT spec<cr>
+nnoremap <leader>gp :CommandT <C-R>=expand("%:p:h") . "/"<cr><cr>
 
 nnoremap <leader>t :call RunCurrentTest()<cr>
 nnoremap <leader>a :w<cr>:call ClearScreen()<cr>:!bin/rspec<cr>
 nnoremap <leader>c :w<cr>:call ClearScreen()<cr>:!bin/cucumber<cr>
 
-nnoremap <leader>gs :Gstatus<CR><C-w>20+
+nnoremap <leader>z :Gstatus<CR><C-w>20+
 
 " =============================================================
 "                 PLUGINS CONFIGURATION
@@ -149,17 +156,12 @@ nnoremap <leader>gs :Gstatus<CR><C-w>20+
 
 " Command-t
 let g:CommandTMaxHeight = 15
-let g:CommandTWildIgnore = &wildignore . ",**/bower_components/*,**/node_modules/*"
+let g:CommandTWildIgnore = &wildignore . ",**/bower_components/*,**/node_modules/*,**/tmp/*"
+let g:CommandTCancelMap='<ESC>'
 
 " Airline
 let g:airline#extensions#tabline#enabled = 0
 let g:airline_powerline_fonts = 1
-
-" SplitJoin
-let g:splitjoin_split_mapping = ''
-let g:splitjoin_join_mapping = ''
-nmap <Leader>j :SplitjoinJoin<cr>
-nmap <Leader>s :SplitjoinSplit<cr>
 
 " =============================================================
 "                      APPEARENCE
@@ -191,7 +193,7 @@ function! RunCurrentTest()
       call SetTestRunner("!bin/cucumber")
       exec g:bjo_test_runner g:bjo_test_file
     elseif match(expand('%'), '_spec\.rb$') != -1
-      call SetTestRunner("!bin/rspec")
+      call SetTestRunner("!rspec")
       exec g:bjo_test_runner g:bjo_test_file
     else
       call SetTestRunner("!ruby -Itest")
