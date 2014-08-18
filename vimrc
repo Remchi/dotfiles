@@ -35,6 +35,8 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'godlygeek/tabular'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'tomtom/tcomment_vim'
+Plugin 'machakann/vim-textobj-delimited'
+Plugin 'terryma/vim-expand-region'
 
 call vundle#end()
 filetype plugin indent on
@@ -111,7 +113,7 @@ endif
 "                      MAPPINGS
 " =============================================================
 
-let mapleader = ","
+let mapleader = "\<Space>"
 
 " Quick open most used files
 nnoremap <leader>en :split ~/Dropbox/notes/inbox.asc<cr>
@@ -121,7 +123,7 @@ nnoremap <leader>es :split<cr>:UltiSnipsEdit<cr>
 " create/open file in current folder
 map <Leader>e :e <C-R>=escape(expand("%:p:h"),' ') . '/'<CR>
 
-nnoremap <silent> <Space> :nohl<Bar>:echo<CR>
+nnoremap <silent> <leader>n :nohl<Bar>:echo<CR>
 nnoremap <leader>m mzyyp`zj
 nnoremap <leader>v :set invpaste paste?<CR>
 nnoremap <leader>V V`]
