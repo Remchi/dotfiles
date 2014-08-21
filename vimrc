@@ -18,6 +18,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-rails'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-vinegar'
+Plugin 'mattn/emmet-vim'
 
 Plugin 'rbgrouleff/bclose.vim'
 Plugin 'bling/vim-airline'
@@ -31,6 +32,7 @@ Plugin 'scrooloose/nerdtree'
 
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'pangloss/vim-javascript'
+Plugin 'mustache/vim-mustache-handlebars'
 
 Plugin 'godlygeek/tabular'
 Plugin 'terryma/vim-multiple-cursors'
@@ -113,7 +115,7 @@ endif
 "                      MAPPINGS
 " =============================================================
 
-let mapleader = "\<Space>"
+let mapleader = ","
 
 " Quick open most used files
 nnoremap <leader>en :split ~/Dropbox/notes/inbox.asc<cr>
@@ -123,7 +125,7 @@ nnoremap <leader>es :split<cr>:UltiSnipsEdit<cr>
 " create/open file in current folder
 map <Leader>e :e <C-R>=escape(expand("%:p:h"),' ') . '/'<CR>
 
-nnoremap <silent> <leader>n :nohl<Bar>:echo<CR>
+nnoremap <silent> <space> :nohl<Bar>:echo<CR>
 nnoremap <leader>m mzyyp`zj
 nnoremap <leader>v :set invpaste paste?<CR>
 nnoremap <leader>V V`]
