@@ -39,6 +39,7 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'machakann/vim-textobj-delimited'
 Plugin 'terryma/vim-expand-region'
+Plugin 'skalnik/vim-vroom'
 
 call vundle#end()
 filetype plugin indent on
@@ -131,6 +132,7 @@ nnoremap <leader>v :set invpaste paste?<CR>
 nnoremap <leader>V V`]
 nmap k gk
 nmap j gj
+nnoremap H ^
 
 noremap <Leader>d :Bclose<CR>
 noremap <Leader>D :bufdo bd<CR>
@@ -160,12 +162,15 @@ nnoremap <leader>z :Gstatus<CR><C-w>20+
 
 " Command-t
 let g:CommandTMaxHeight = 15
-let g:CommandTWildIgnore = &wildignore . ",**/bower_components/*,**/node_modules/*,**/tmp/*"
+let g:CommandTWildIgnore = &wildignore . ",**/bower_components/*,**/node_modules/*,**/tmp/*,**/assets/images/*,**/assets/fonts/*"
 let g:CommandTCancelMap='<ESC>'
 
 " Airline
 let g:airline#extensions#tabline#enabled = 0
 let g:airline_powerline_fonts = 1
+
+" Vroom
+let g:vroom_use_spring = 1
 
 " =============================================================
 "                      APPEARENCE
@@ -181,6 +186,10 @@ let &t_AF="\e[38;5;%dm"
 " let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 
 colorscheme smyck
+
+if has("gui_running")
+  set guifont=Source\ Code\ Pro\ for\ Powerline:h12
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                       TESTS
