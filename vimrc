@@ -16,6 +16,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-rails'
+Plugin 'tpope/vim-unimpaired'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-vinegar'
 Plugin 'mattn/emmet-vim'
@@ -28,8 +29,6 @@ Plugin 'Lokaltog/vim-easymotion'
 Plugin 'wincent/Command-T'
 Plugin 'SirVer/ultisnips'
 
-Plugin 'scrooloose/nerdtree'
-
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mustache/vim-mustache-handlebars'
@@ -40,6 +39,7 @@ Plugin 'tomtom/tcomment_vim'
 Plugin 'machakann/vim-textobj-delimited'
 Plugin 'terryma/vim-expand-region'
 Plugin 'skalnik/vim-vroom'
+Plugin 'AndrewRadev/splitjoin.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -120,7 +120,7 @@ let mapleader = ","
 
 " Quick open most used files
 nnoremap <leader>en :split ~/Dropbox/notes/inbox.asc<cr>
-nnoremap <leader>ev :split ~/.vimrc<cr>
+nnoremap <leader>ev :tabnew ~/.vimrc<cr>
 nnoremap <leader>es :split<cr>:UltiSnipsEdit<cr>
 
 " create/open file in current folder

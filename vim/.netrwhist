@@ -1,0 +1,10 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =8
+let g:netrw_dirhist_1='/Users/remchi/.dotfiles'
+let g:netrw_dirhist_2='/Users/remchi/.dotfiles/vim'
+let g:netrw_dirhist_3='/Users/remchi/.dotfiles'
+let g:netrw_dirhist_4='/Users/remchi/.dotfiles/emacs'
+let g:netrw_dirhist_5='/Users/remchi/.dotfiles'
+let g:netrw_dirhist_6='/Users/remchi/.dotfiles/emacs'
+let g:netrw_dirhist_7='/Users/remchi/.dotfiles/vim'
+let g:netrw_dirhist_8='/Users/remchi/.dotfiles'
