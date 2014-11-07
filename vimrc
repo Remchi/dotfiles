@@ -17,6 +17,7 @@ Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-unimpaired'
+Plugin 'tpope/vim-abolish'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-vinegar'
 Plugin 'mattn/emmet-vim'
@@ -26,20 +27,24 @@ Plugin 'bling/vim-airline'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'Lokaltog/vim-easymotion'
 
-Plugin 'wincent/Command-T'
 Plugin 'SirVer/ultisnips'
+Plugin 'skalnik/vim-vroom'
 
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mustache/vim-mustache-handlebars'
 
 Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'machakann/vim-textobj-delimited'
+Plugin 'rizzatti/dash.vim'
+
+" Test Run
 Plugin 'terryma/vim-expand-region'
-Plugin 'skalnik/vim-vroom'
 Plugin 'AndrewRadev/splitjoin.vim'
+Plugin 'takac/vim-hardtime'
 
 call vundle#end()
 filetype plugin indent on
@@ -70,7 +75,7 @@ set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set expandtab
-set relativenumber
+" set relativenumber
 set number
 set wrap
 set linebreak
@@ -119,12 +124,13 @@ endif
 let mapleader = ","
 
 " Quick open most used files
-nnoremap <leader>en :split ~/Dropbox/notes/inbox.asc<cr>
+nnoremap <leader>em :!open -a 'Marked 2.app' '%:p'<cr>
+nnoremap <leader>en :e ~/Dropbox/notes/INBOX.md<cr>
 nnoremap <leader>ev :tabnew ~/.vimrc<cr>
 nnoremap <leader>es :split<cr>:UltiSnipsEdit<cr>
 
 " create/open file in current folder
-map <Leader>e :e <C-R>=escape(expand("%:p:h"),' ') . '/'<CR>
+map <Leader>ee :e <C-R>=escape(expand("%:p:h"),' ') . '/'<CR>
 
 nnoremap <silent> <space> :nohl<Bar>:echo<CR>
 nnoremap <leader>m mzyyp`zj
@@ -133,37 +139,65 @@ nnoremap <leader>V V`]
 nmap k gk
 nmap j gj
 nnoremap H ^
+nnoremap E $
 
 noremap <Leader>d :Bclose<CR>
 noremap <Leader>D :bufdo bd<CR>
 
 cnoremap %% <C-R>=expand("%:p:h") . "/" <CR>
 
-nnoremap <leader>f :CommandT<cr>
-nnoremap <leader>p :CommandTFlush<cr>
-nnoremap <leader>. :CommandTBuffer<cr>
-nnoremap <leader>w :CommandT app/assets/javascripts<cr>
-nnoremap <leader>gc :CommandT app/controllers<cr>
-nnoremap <leader>gv :CommandT app/views<cr>
-nnoremap <leader>gm :CommandT app/models<cr>
-nnoremap <leader>gs :CommandT app/services<cr>
-nnoremap <leader>gr :CommandT spec<cr>
-nnoremap <leader>gp :CommandT <C-R>=expand("%:p:h") . "/"<cr><cr>
+" nnoremap <leader>f :CommandT<cr>
+" nnoremap <leader>p :CommandTFlush<cr>
+" nnoremap <leader>. :CommandTBuffer<cr>
+" nnoremap <leader>w :CommandT app/assets/javascripts<cr>
+" nnoremap <leader>gc :CommandT app/controllers<cr>
+" nnoremap <leader>gv :CommandT app/views<cr>
+" nnoremap <leader>gm :CommandT app/models<cr>
+" nnoremap <leader>gs :CommandT app/services<cr>
+" nnoremap <leader>gr :CommandT spec<cr>
+" nnoremap <leader>gp :CommandT <C-R>=expand("%:p:h") . "/"<cr><cr>
 
-nnoremap <leader>t :call RunCurrentTest()<cr>
-nnoremap <leader>a :w<cr>:call ClearScreen()<cr>:!bin/rspec<cr>
-nnoremap <leader>c :w<cr>:call ClearScreen()<cr>:!bin/cucumber<cr>
+" nnoremap <leader>t :call RunCurrentTest()<cr>
+" nnoremap <leader>a :w<cr>:call ClearScreen()<cr>:!bin/rspec<cr>
+" nnoremap <leader>c :w<cr>:call ClearScreen()<cr>:!bin/cucumber<cr>
 
 nnoremap <leader>z :Gstatus<CR><C-w>20+
+
+nnoremap <leader>. :buffers<cr>:buffer<space>
+nnoremap <leader>1 1gt<cr>
+nnoremap <leader>2 2gt<cr>
+nnoremap <leader>3 3gt<cr>
+nnoremap <leader>4 4gt<cr>
+
+nnoremap <leader>gc :Econtroller 
+nnoremap <leader>gm :Emodel 
+nnoremap <leader>gv :Eview 
+nnoremap <leader>gr :Espec 
+nnoremap <leader>gj :Ejavascript 
+nnoremap <leader>gs :Eservice 
+nnoremap <leader>gi :Einitializer 
+
+" inc search for range commands
+cnoremap $t <CR>:t''<CR>
+cnoremap $T <CR>:T''<CR>
+cnoremap $m <CR>:m''<CR>
+cnoremap $M <CR>:M''<CR>
+cnoremap $d <CR>:d<CR>``
 
 " =============================================================
 "                 PLUGINS CONFIGURATION
 " =============================================================
 
 " Command-t
-let g:CommandTMaxHeight = 15
-let g:CommandTWildIgnore = &wildignore . ",**/bower_components/*,**/node_modules/*,**/tmp/*,**/assets/images/*,**/assets/fonts/*"
-let g:CommandTCancelMap='<ESC>'
+" let g:CommandTMaxHeight = 15
+" let g:CommandTWildIgnore = &wildignore . ",**/bower_components/*,**/node_modules/*,**/tmp/*,**/assets/images/*,**/assets/fonts/*"
+" let g:CommandTCancelMap='<ESC>'
+
+" Easymotion
+nmap s <Plug>(easymotion-s)
+omap e <Plug>(easymotion-bd-t)
+vmap e <Plug>(easymotion-bd-t)
+nmap <leader>n <Plug>(easymotion-bd-jk)
 
 " Airline
 let g:airline#extensions#tabline#enabled = 0
@@ -171,6 +205,12 @@ let g:airline_powerline_fonts = 1
 
 " Vroom
 let g:vroom_use_spring = 1
+
+" Markdown
+let g:vim_markdown_folding_disabled=1
+
+" Hardtime
+let g:hardtime_default_on = 1
 
 " =============================================================
 "                      APPEARENCE
@@ -194,59 +234,75 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                       TESTS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! RunCurrentTest()
-  :w
-  call ClearScreen()
+" function! RunCurrentTest()
+"   :w
+"   call ClearScreen()
+"
+"   let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\|_test.rb\)$') != -1
+"   if in_test_file
+"     call SetTestFile()
+"
+"     if match(expand('%'), '\.feature$') != -1
+"       call SetTestRunner("!bin/cucumber")
+"       exec g:bjo_test_runner g:bjo_test_file
+"     elseif match(expand('%'), '_spec\.rb$') != -1
+"       call SetTestRunner("!rspec")
+"       exec g:bjo_test_runner g:bjo_test_file
+"     else
+"       call SetTestRunner("!ruby -Itest")
+"       exec g:bjo_test_runner g:bjo_test_file
+"     endif
+"   else
+"     exec g:bjo_test_runner g:bjo_test_file
+"   endif
+" endfunction
+"
+" function! SetTestRunner(runner)
+"   let g:bjo_test_runner=a:runner
+" endfunction
+"
+" function! RunCurrentLineInTest()
+"   let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\|_test.rb\)$') != -1
+"   if in_test_file
+"     call SetTestFileWithLine()
+"   end
+"
+"   exec "!bin/rspec" g:bjo_test_file . ":" . g:bjo_test_file_line
+" endfunction
+"
+" function! SetTestFile()
+"   let g:bjo_test_file=@%
+" endfunction
+"
+" function! SetTestFileWithLine()
+"   let g:bjo_test_file=@%
+"   let g:bjo_test_file_line=line(".")
+" endfunction
+"
+" function! ClearScreen()
+"   :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+"   :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+"   :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+"   :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+"   :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+"   :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+" endfunction
 
-  let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\|_test.rb\)$') != -1
-  if in_test_file
-    call SetTestFile()
+" =============================================================
+"                      PROJECTIONS
+" =============================================================
 
-    if match(expand('%'), '\.feature$') != -1
-      call SetTestRunner("!bin/cucumber")
-      exec g:bjo_test_runner g:bjo_test_file
-    elseif match(expand('%'), '_spec\.rb$') != -1
-      call SetTestRunner("!rspec")
-      exec g:bjo_test_runner g:bjo_test_file
-    else
-      call SetTestRunner("!ruby -Itest")
-      exec g:bjo_test_runner g:bjo_test_file
-    endif
-  else
-    exec g:bjo_test_runner g:bjo_test_file
-  endif
-endfunction
-
-function! SetTestRunner(runner)
-  let g:bjo_test_runner=a:runner
-endfunction
-
-function! RunCurrentLineInTest()
-  let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\|_test.rb\)$') != -1
-  if in_test_file
-    call SetTestFileWithLine()
-  end
-
-  exec "!bin/rspec" g:bjo_test_file . ":" . g:bjo_test_file_line
-endfunction
-
-function! SetTestFile()
-  let g:bjo_test_file=@%
-endfunction
-
-function! SetTestFileWithLine()
-  let g:bjo_test_file=@%
-  let g:bjo_test_file_line=line(".")
-endfunction
-
-function! ClearScreen()
-  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-endfunction
+let g:rails_projections = {
+      \ "app/services/*.rb": {
+      \   "command": "service",
+      \   "template":
+      \     ["class %S", "end"],
+      \   "test": [
+      \     "test/unit/%s_uploader_test.rb",
+      \     "spec/services/%s_spec.rb"
+      \   ],
+      \   "keywords": "process version"
+      \ }}
 
 " =============================================================
 "                      CUSTOM FUNCTIONS
