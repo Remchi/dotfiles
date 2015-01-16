@@ -1,2 +1,5 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =0
+let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_1='/Users/remchi/code/repgain_frontend'
+let g:netrw_dirhist_2='/Users/remchi/code/repgain_frontend/app'
+let g:netrw_dirhist_3='/Users/remchi/code/repgain_frontend'

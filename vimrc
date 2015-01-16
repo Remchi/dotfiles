@@ -19,7 +19,6 @@ Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-abolish'
 Plugin 'vim-ruby/vim-ruby'
-Plugin 'tpope/vim-vinegar'
 Plugin 'mattn/emmet-vim'
 
 Plugin 'rbgrouleff/bclose.vim'
@@ -28,7 +27,8 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'Lokaltog/vim-easymotion'
 
 Plugin 'SirVer/ultisnips'
-Plugin 'skalnik/vim-vroom'
+" Plugin 'skalnik/vim-vroom'
+Plugin 'janko-m/vim-test'
 
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'pangloss/vim-javascript'
@@ -40,11 +40,16 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'machakann/vim-textobj-delimited'
 Plugin 'rizzatti/dash.vim'
+Plugin 'gorkunov/smartpairs.vim'
 
 " Test Run
 Plugin 'terryma/vim-expand-region'
 Plugin 'AndrewRadev/splitjoin.vim'
 Plugin 'takac/vim-hardtime'
+Plugin 'kien/ctrlp.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'godlygeek/csapprox'
+Plugin 'mmai/wikilink'
 
 call vundle#end()
 filetype plugin indent on
@@ -125,7 +130,7 @@ let mapleader = ","
 
 " Quick open most used files
 nnoremap <leader>em :!open -a 'Marked 2.app' '%:p'<cr>
-nnoremap <leader>en :e ~/Dropbox/notes/INBOX.md<cr>
+nnoremap <leader>en :e ~/Dropbox/gollum/home.md<cr>
 nnoremap <leader>ev :tabnew ~/.vimrc<cr>
 nnoremap <leader>es :split<cr>:UltiSnipsEdit<cr>
 
@@ -161,21 +166,35 @@ cnoremap %% <C-R>=expand("%:p:h") . "/" <CR>
 " nnoremap <leader>a :w<cr>:call ClearScreen()<cr>:!bin/rspec<cr>
 " nnoremap <leader>c :w<cr>:call ClearScreen()<cr>:!bin/cucumber<cr>
 
+" CtrlP plugin 
+nnoremap <leader>f :CtrlP<cr>
+nnoremap <leader>w :CtrlP app/assets/javascripts<cr>
+nnoremap <leader>. :CtrlPBuffer<cr>
+nnoremap <leader>p :CtrlPClearCache<cr>
+nnoremap <leader>gc :CtrlP app/controllers<cr>
+nnoremap <leader>gv :CtrlP app/views<cr>
+nnoremap <leader>gm :CtrlP app/models<cr>
+nnoremap <leader>gs :CtrlP app/services<cr>
+nnoremap <leader>gr :CtrlP spec<cr>
+nnoremap <leader>gt :CtrlP ~/Dropbox/gollum<cr>
+nnoremap <leader>gp :CtrlP <C-R>=expand("%:p:h") . "/"<cr><cr>
+
 nnoremap <leader>z :Gstatus<CR><C-w>20+
 
-nnoremap <leader>. :buffers<cr>:buffer<space>
+" nnoremap <leader>. :buffers<cr>:buffer<space>
 nnoremap <leader>1 1gt<cr>
 nnoremap <leader>2 2gt<cr>
 nnoremap <leader>3 3gt<cr>
 nnoremap <leader>4 4gt<cr>
 
-nnoremap <leader>gc :Econtroller 
-nnoremap <leader>gm :Emodel 
-nnoremap <leader>gv :Eview 
-nnoremap <leader>gr :Espec 
-nnoremap <leader>gj :Ejavascript 
-nnoremap <leader>gs :Eservice 
-nnoremap <leader>gi :Einitializer 
+" Rails plugin navigation
+" nnoremap <leader>gc :Econtroller 
+" nnoremap <leader>gm :Emodel 
+" nnoremap <leader>gv :Eview 
+" nnoremap <leader>gr :Espec 
+" nnoremap <leader>gj :Ejavascript 
+" nnoremap <leader>gs :Eservice 
+" nnoremap <leader>gi :Einitializer 
 
 " inc search for range commands
 cnoremap $t <CR>:t''<CR>
@@ -193,6 +212,11 @@ cnoremap $d <CR>:d<CR>``
 " let g:CommandTWildIgnore = &wildignore . ",**/bower_components/*,**/node_modules/*,**/tmp/*,**/assets/images/*,**/assets/fonts/*"
 " let g:CommandTCancelMap='<ESC>'
 
+" NERDTree
+nnoremap <leader>q :NERDTreeToggle<cr>
+let NERDTreeMinimalUI=1
+let NERDTreeShowLineNumbers=1
+
 " Easymotion
 nmap s <Plug>(easymotion-s)
 omap e <Plug>(easymotion-bd-t)
@@ -204,13 +228,21 @@ let g:airline#extensions#tabline#enabled = 0
 let g:airline_powerline_fonts = 1
 
 " Vroom
-let g:vroom_use_spring = 1
+" let g:vroom_use_spring = 1
 
 " Markdown
 let g:vim_markdown_folding_disabled=1
 
-" Hardtime
-let g:hardtime_default_on = 1
+" CtrlP
+let g:ctrlp_working_path_mode='a'
+set wildignore+=**/bower_components/*,**/node_modules/*,**/tmp/*,**/assets/images/*,**/assets/fonts/*
+
+" vim-test
+nmap <silent> <leader>t :TestNearest<CR>
+nmap <silent> <leader>T :TestFile<CR>
+nmap <silent> <leader>a :TestSuite<CR>
+nmap <silent> <leader>l :TestLast<CR>
+let g:test#rspec#executable = 'bin/rspec'
 
 " =============================================================
 "                      APPEARENCE
@@ -319,3 +351,39 @@ function! s:MkNonExDir(file, buf)
         endif
     endif
 endfunction
+
+" Selecta
+" ===========================
+" function! SelectaCommand(choice_command, selecta_args, vim_command)
+"   try
+"     let selection = system(a:choice_command . " | selecta " . a:selecta_args)
+"   catch /Vim:Interrupt/
+"     " Swallow the ^C so that the redraw below happens; otherwise there will be
+"     " leftovers from selecta on the screen
+"     redraw!
+"     return
+"   endtry
+"   redraw!
+"   exec a:vim_command . " " . selection
+" endfunction
+"
+" function! SelectaFromList(choices, selecta_args, vim_command)
+"   let non_blank_choices = filter(a:choices, 'v:val !=""')
+"   call SelectaCommand('echo "' . escape(join(non_blank_choices, "\n"), '"') . '"', a:selecta_args, a:vim_command)
+" endfunction
+"
+" function! SelectaBuffer()
+"   let buffers = map(range(1, bufnr("$")), 'bufname(bufnr(v:val))')
+"   call SelectaFromList(buffers, "", ":b")
+" endfunction
+"
+" nnoremap <leader>f :call SelectaCommand("find * -type f", "", ":e")<cr>
+" nnoremap <leader>. :call SelectaBuffer()<cr>
+" nnoremap <leader>w :call SelectaCommand("find app/assets/javascripts/* -type f", "", ":e")<cr>
+" nnoremap <leader>gc :call SelectaCommand("find app/controllers/* -type f", "", ":e")<cr>
+" nnoremap <leader>gv :call SelectaCommand("find app/views/* -type f", "", ":e")<cr>
+" nnoremap <leader>gm :call SelectaCommand("find app/models/* -type f", "", ":e")<cr>
+" nnoremap <leader>gs :call SelectaCommand("find app/services/* -type f", "", ":e")<cr>
+" nnoremap <leader>gr :call SelectaCommand("find spec/* -type f", "", ":e")<cr>
+" nnoremap <leader>gp :call SelectaCommand("find " . expand("%:p:h") . "/* -type f", "", ":e")<cr>
+"

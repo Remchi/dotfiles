@@ -1,0 +1,63 @@
+snippet iife
+(function() {
+  'use strict';
+	
+	$0
+
+})();
+endsnippet
+
+snippet ngcon
+angular.module('$1').controller('$2', $2);
+
+$2.$inject = [$3];
+
+function $2(`!p snip.rv = t[3].replace("'", "")`) {
+	var vm = this;
+
+	$0
+
+	activate();
+
+	//////////////////////
+	function activate() {
+	}
+
+}
+endsnippet
+
+snippet ngfac
+angular.module('$1').factory('$2', $2);
+
+$2.$inject = [$3];
+
+function $2(`!p snip.rv = t[3].replace("'", "")`) {
+	$0
+}
+endsnippet
+
+snippet ngmod
+(function() {
+  'use strict';
+
+  angular.module('$1', [$0]);
+})();
+endsnippet
+
+snippet ngroute
+angular.module('$1').config($2);
+
+$2.$inject = ['$stateProvider'$3];
+
+function $2($stateProvider`!p snip.rv = t[3].replace("'", "")`) {
+
+	$stateProvider.state('$4', {
+		$0
+	});
+
+}
+endsnippet
+
+snippet cl
+console.log('$0');
+endsnippet

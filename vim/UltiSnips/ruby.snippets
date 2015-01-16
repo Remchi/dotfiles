@@ -1,0 +1,27 @@
+snippet formobject
+class $1Form
+  include Virtus.model
+  extend ActiveModel::Naming
+  include ActiveModel::Conversion
+  include ActiveModel::Validations
+
+  def save
+    if valid?
+      persist!
+      true
+    else
+      false
+    end
+  end
+
+  def persisted?
+    false
+  end
+
+  private
+
+  def persist!
+
+  end
+end
+endsnippet
