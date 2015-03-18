@@ -12,6 +12,7 @@ export LC_ALL=en_US.UTF-8
 
 alias e="/Applications/Emacs.app/Contents/MacOS/Emacs"
 alias v="/usr/local/bin/vim"
+alias nv="/usr/local/bin/nvim"
 alias be="bundle exec"
 
 # Path to your oh-my-zsh configuration.
@@ -70,6 +71,6 @@ export PATH="/usr/local/heroku/bin:$PATH"
 export PATH="$HOME/.cask/bin:$PATH"
 
 # PostgresApp
-export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.3/bin
+export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.4/bin
 
 # PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

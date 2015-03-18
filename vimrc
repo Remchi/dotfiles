@@ -50,6 +50,9 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'godlygeek/csapprox'
 Plugin 'mmai/wikilink'
+Plugin 'jeetsukumaran/vim-indentwise'
+Plugin 'mtth/scratch.vim'
+Plugin 'slim-template/vim-slim'
 
 call vundle#end()
 filetype plugin indent on
@@ -119,6 +122,8 @@ if has("autocmd")
 
     autocmd BufRead,BufNewFile *.asc setfiletype asciidoc
 
+    au BufNewFile,BufReadPost *.md set filetype=markdown
+    let g:markdown_fenced_languages = ['coffee', 'css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml', 'html']
   augroup END
 endif
 
@@ -229,20 +234,26 @@ let g:airline_powerline_fonts = 1
 
 " Vroom
 " let g:vroom_use_spring = 1
+" let g:vroom_use_binstubs = 1
+" let g:vroom_rspec_version = '3.x'
+" let g:vroom_cucumber_path = './bin/cucumber'
 
 " Markdown
 let g:vim_markdown_folding_disabled=1
 
 " CtrlP
 let g:ctrlp_working_path_mode='a'
-set wildignore+=**/bower_components/*,**/node_modules/*,**/tmp/*,**/assets/images/*,**/assets/fonts/*
+set wildignore+=**/bower_components/*,**/node_modules/*,**/tmp/*,**/assets/images/*,**/assets/fonts/*,**/public/images/*
 
 " vim-test
 nmap <silent> <leader>t :TestNearest<CR>
 nmap <silent> <leader>T :TestFile<CR>
 nmap <silent> <leader>a :TestSuite<CR>
 nmap <silent> <leader>l :TestLast<CR>
-let g:test#rspec#executable = 'bin/rspec'
+" let g:test#rspec#executable = 'bin/rspec'
+
+" scratch
+let g:scratch_filetype = 'markdown'
 
 " =============================================================
 "                      APPEARENCE
