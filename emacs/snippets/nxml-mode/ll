@@ -1,0 +1,7 @@
+<$1>
+  <listlink type="windowreference">
+    <class>referencetext</class>
+    <recordname>reference.distinctions.${2:$(replace-regexp-in-string "[^a-zA-Z]" "" (downcase yas-selected-text))}</recordname>
+  </listlink>
+  <name type="string">${2:$(yas-selected-text)}</name>
+</$1>

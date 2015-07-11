@@ -27,6 +27,7 @@ ZSH_THEME="robbyrussell"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias plex="sudo launchctl unload /Library/LaunchDaemons/com.plex.plexconnect.bash.plist;sudo launchctl load /Library/LaunchDaemons/com.plex.plexconnect.bash.plist"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"

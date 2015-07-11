@@ -1,0 +1,11 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: FG Reference Item
+# key: ref
+# binding: direct-keybinding
+# --
+<${1:$(replace-regexp-in-string "[ |’|,|-|!]" "" (downcase yas-text))}>
+    <name type="string">$1</name>
+    <text type="formattedtext">
+        $0
+    </text>
+</${1:$(replace-regexp-in-string "[ |’|,|-|!]" "" (downcase yas-text))}>
