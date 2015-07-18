@@ -1,0 +1,3 @@
+model: function($1) {
+  return $0;
+}
