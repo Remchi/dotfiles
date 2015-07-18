@@ -5,5 +5,7 @@ emacs/projectile-bookmarks.eld
 emacs/auto-save-list/*
 emacs/.cask/
 emacs/elpa
+emacs/ido.last
+emacs/smex-items
 
 vim/bundle/
