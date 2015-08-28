@@ -89,7 +89,7 @@
 ;; ==================================================
 
 (load-theme 'peacock)
-(set-frame-font "Source Code Pro for Powerline-14")
+(set-frame-font "Source Code Pro-14")
 
 ;; ==================================================
 ;;                 Packages
