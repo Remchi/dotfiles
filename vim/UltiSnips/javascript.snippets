@@ -1,7 +1,7 @@
 snippet iife
 (function() {
   'use strict';
-	
+
 	$0
 
 })();
@@ -72,4 +72,77 @@ ENV.contentSecurityPolicy = {
 	'style-src': "'self' 'unsafe-inline' http://fonts.googleapis.com",
 	'media-src': "'self'"
 };
+endsnippet
+
+snippet	rcon
+import React from 'react';
+import AltContainer from 'alt/AltContainer';
+import ${1:ComponentName} from './$1';
+import $1Store from '../../stores/$1Store';
+
+export default class $1Container extends React.Component {
+  render() {
+    return (
+      <AltContainer store={$1Store}>
+				<$1$0 />
+      </AltContainer>
+    );
+  }
+}
+endsnippet
+
+snippet rcom
+import React from 'react';
+import ${1:ComponentName}Actions from '../../actions/$1Actions';
+
+export default class $1 extends React.Component {
+  render() {
+    return (
+      <div>
+				$0
+      </div>
+    );
+  }
+}
+endsnippet
+
+snippet ract
+import alt from '../alt';
+import api from '../utils/${1:ComponentName}Api';
+
+class $1Actions {
+	$0
+}
+
+export default alt.createActions($1Actions);
+endsnippet
+
+snippet rapi
+import request from 'superagent-bluebird-promise';
+
+var Api = {
+
+	$0
+
+};
+
+export default Api;
+endsnippet
+
+snippet rstore
+import alt from '../alt';
+import actions from '../actions/${1:ComponentName}Actions';
+import _ from 'lodash';
+
+class $1Store {
+  constructor() {
+		$0
+    this.bindListeners({
+      // handleFetchApplications: actions.FETCH_APPLICATIONS,
+    });
+  }
+
+}
+
+export default alt.createStore($1Store, '$1Store');
 endsnippet
