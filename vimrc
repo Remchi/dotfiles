@@ -30,7 +30,7 @@ Plugin 'SirVer/ultisnips'
 Plugin 'janko-m/vim-test'
 
 Plugin 'kchmck/vim-coffee-script'
-Plugin 'pangloss/vim-javascript'
+"Plugin 'pangloss/vim-javascript'
 Plugin 'mustache/vim-mustache-handlebars'
 
 Plugin 'godlygeek/tabular'
@@ -46,11 +46,14 @@ Plugin 'terryma/vim-expand-region'
 Plugin 'AndrewRadev/splitjoin.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
-Plugin 'mxw/vim-jsx'
+"Plugin 'mxw/vim-jsx'
 Plugin 'NLKNguyen/papercolor-theme'
 Plugin 'kana/vim-textobj-user'
 Plugin 'nelstrom/vim-textobj-rubyblock'
 Plugin 'ervandew/supertab'
+Plugin 'joshdick/onedark.vim'
+"Plugin 'isRuslan/vim-es6'
+"Plugin 'othree/yajs.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -228,6 +231,7 @@ nmap <silent> <leader>l :TestLast<CR>
 
 " JSX
 let g:jsx_ext_required = 0
+let javascript_enable_domhtmlcss = 1
 
 " =============================================================
 "                      APPEARENCE
@@ -243,7 +247,8 @@ let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 let &t_SR = "\<Esc>]50;CursorShape=2\x7"
 let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 
-colorscheme smyck
+" colorscheme smyck
+colorscheme onedark
 
 if has("gui_running")
   set guifont=Source\ Code\ Pro\ for\ Powerline:h12
