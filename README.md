@@ -13,6 +13,7 @@ git clone https://github.com/Remchi/dotfiles.git .dotfiles
 ln -s .dotfiles/vimrc .vimrc
 ln -s .dotfiles/zshrc-oh-my-zsh .zshrc
 ln -s .dotfiles/vim .vim
-ln -s .dotfiles/emacs .emacs.d
 ln -s .dotfiles/gitconfig .gitconfig
+ln -s .dotfiles/gemrc .gemrc
+ln -s .dotfiles/emacs .emacs.d
 ```
