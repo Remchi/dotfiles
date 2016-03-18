@@ -1,3 +1,24 @@
+;;           Packages
+;; smex
+;; exec-path-from-shell
+;; ido-ubiquitous
+;; flx-ido
+;; ido-vertical
+;; ido-at-point
+;; projectile
+;; projectile-rails
+;; avy
+;; powerline
+;; discover
+;; yasnippet
+;; auto-complete
+;; expand-region
+;; change-inner
+;; magit
+;; neotree
+;; multiple-cursors
+;; js2-mode
+
 (require 'package)
 (add-to-list 'package-archives
 	     '("melpa" . "http://melpa.org/packages/") t)
@@ -88,7 +109,7 @@
 ;;                 Appearence
 ;; ==================================================
 
-(load-theme 'peacock)
+(load-theme 'atom-one-dark)
 (set-frame-font "Source Code Pro-14")
 
 ;; ==================================================
@@ -754,10 +775,10 @@ DELTA should be a multiple of 10, in the units used by the
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(compilation-message-face (quote default))
- '(custom-enabled-themes (quote (sanityinc-tomorrow-night)))
+ '(custom-enabled-themes (quote (sanityinc-tomorrow-night atom-one-dark)))
  '(custom-safe-themes
    (quote
-    ("26ce7eea701bfd143ac536e6805224cff5598b75effb60f047878fe9c4833ae4" "a2e7b508533d46b701ad3b055e7c708323fb110b6676a8be458a758dd8f24e27" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "05c3bc4eb1219953a4f182e10de1f7466d28987f48d647c01f1f0037ff35ab9a" "b06aaf5cefc4043ba018ca497a9414141341cb5a2152db84a9a80020d35644d1" default)))
+    ("4904daa168519536b08ca4655d798ca0fb50d3545e6244cefcf7d0c7b338af7e" "26ce7eea701bfd143ac536e6805224cff5598b75effb60f047878fe9c4833ae4" "a2e7b508533d46b701ad3b055e7c708323fb110b6676a8be458a758dd8f24e27" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "05c3bc4eb1219953a4f182e10de1f7466d28987f48d647c01f1f0037ff35ab9a" "b06aaf5cefc4043ba018ca497a9414141341cb5a2152db84a9a80020d35644d1" default)))
  '(highlight-changes-colors ("#FD5FF0" "#AE81FF"))
  '(highlight-tail-colors
    (quote
@@ -782,4 +803,4 @@ DELTA should be a multiple of 10, in the units used by the
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
-          
+

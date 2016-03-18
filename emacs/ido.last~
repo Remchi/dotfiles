@@ -1,0 +1,26 @@
+;;; -*- coding: utf-8 -*-
+
+;; ----- ido-last-directory-list -----
+(
+ ("/Users/rem/" . ".emacs.d/")
+)
+
+;; ----- ido-work-directory-list -----
+(
+ "/Users/rem/.emacs.d/"
+)
+
+;; ----- ido-work-file-list -----
+(
+ "init.el"
+)
+
+;; ----- ido-dir-file-cache -----
+(
+ ("/Users/rem/.emacs.d/" (22109 27117 0 0) "snippets/" "init.el" "ido.last~" "ido.last" "emacs" "elpa/" ".mc-lists.el" "../" "./")
+
+ ("/Users/rem/" (22109 26797 0 0) "Screencasts/" "RPG/" "Public/" "Plex/" "Pictures/" "Music/" "Movies/" "Library/" "Dropbox/" "Downloads/" "Documents/" "Desktop/" "code/" "Books/" "Applications/" ".zshrc" ".zsh_history" ".zsh-update" ".zcompdump-Rem’s MacBook Pro-5.1.1" ".zcompdump-Rem’s MacBook Pro-5.0.8" ".vimrc" ".viminfo" ".vim/" ".Trash/" ".subversion/" ".rbenv/" ".oh-my-zsh/" ".gitconfig" ".gemrc" ".gem/" ".emacs.d/" ".DS_Store" ".dropbox/" ".dotfiles/" ".config/" ".CFUserTextEncoding" ".cache/" ".bash_sessions/" ".bash_history" ".atom/" "../" "./")
+)
+
+;; ----- ido-unc-hosts-cache -----
+t

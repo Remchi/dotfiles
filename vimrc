@@ -23,6 +23,7 @@ Plugin 'mattn/emmet-vim'
 
 Plugin 'rbgrouleff/bclose.vim'
 Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'Lokaltog/vim-easymotion'
 
@@ -30,7 +31,7 @@ Plugin 'SirVer/ultisnips'
 Plugin 'janko-m/vim-test'
 
 Plugin 'kchmck/vim-coffee-script'
-"Plugin 'pangloss/vim-javascript'
+Plugin 'pangloss/vim-javascript'
 Plugin 'mustache/vim-mustache-handlebars'
 
 Plugin 'godlygeek/tabular'
@@ -40,20 +41,24 @@ Plugin 'tomtom/tcomment_vim'
 Plugin 'machakann/vim-textobj-delimited'
 Plugin 'rizzatti/dash.vim'
 Plugin 'gorkunov/smartpairs.vim'
+Plugin 'AlessandroYorba/Alduin'
 
 " Test Run
 Plugin 'terryma/vim-expand-region'
 Plugin 'AndrewRadev/splitjoin.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
-"Plugin 'mxw/vim-jsx'
+Plugin 'mxw/vim-jsx'
 Plugin 'NLKNguyen/papercolor-theme'
 Plugin 'kana/vim-textobj-user'
 Plugin 'nelstrom/vim-textobj-rubyblock'
 Plugin 'ervandew/supertab'
+
+" Colour Themes
 Plugin 'joshdick/onedark.vim'
-"Plugin 'isRuslan/vim-es6'
-"Plugin 'othree/yajs.vim'
+Plugin 'altercation/vim-colors-solarized'
+
+Plugin 'lyokha/vim-xkbswitch'
 
 call vundle#end()
 filetype plugin indent on
@@ -108,6 +113,7 @@ set nostartofline
 set noesckeys
 set ttimeout
 set ttimeoutlen=1
+set listchars=tab:>-,trail:~,extends:>,precedes:<,space:.
 " =============================================================
 "                    AUTOCOMMANDS
 " =============================================================
@@ -136,6 +142,9 @@ endif
 " =============================================================
 
 let mapleader = ","
+
+" insert mode
+imap <c-e> <esc>A
 
 " Quick open most used files
 nnoremap <leader>em :!open -a 'Marked 2.app' '%:p'<cr>
@@ -233,6 +242,16 @@ nmap <silent> <leader>l :TestLast<CR>
 let g:jsx_ext_required = 0
 let javascript_enable_domhtmlcss = 1
 
+let g:XkbSwitchEnabled = 1
+let g:XkbSwitchIMappings = ['ru']
+let g:XkbSwitchIMappingsTr = {
+            \ 'ru':
+            \ {'<': 'qwfpgjluy;[]arstdhneio''\zxcvbkm,.`/'.
+            \       'QWFPGJLUY:{}ARSTDHNEIO"ZXCVBKM<>?~@#$^&|',
+            \  '>': 'йцукенгшщзхъфывапролджэячсмитьбюё.'.
+            \       'ЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ,Ё"№;:?/'},
+            \ }
+
 " =============================================================
 "                      APPEARENCE
 " =============================================================
@@ -243,15 +262,18 @@ let &t_AB="\e[48;5;%dm"
 let &t_AF="\e[38;5;%dm"
 
 " Making cursor a bar in insert mode
-let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-let &t_SR = "\<Esc>]50;CursorShape=2\x7"
-let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+" let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+" let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+" let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 
 " colorscheme smyck
-colorscheme onedark
+" colorscheme onedark
+colorscheme solarized
 
 if has("gui_running")
-  set guifont=Source\ Code\ Pro\ for\ Powerline:h12
+  " set guifont=Source\ Code\ Pro\ for\ Powerline:h14
+  set guifont=Ubuntu\ Mono\ derivative\ Powerline:h16
+  set linespace=2
 endif
 
 " =============================================================
@@ -296,3 +318,4 @@ function! <SID>StripTrailingWhitespaces()
     call cursor(l, c)
 endfun
 
+" set langmap=йцукенгшщзхъфывапролджэячсмитьбю;qwfpgjluy\\;[]arstdhneio'zxcvbkm\\,.
