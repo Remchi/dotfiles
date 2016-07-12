@@ -7,7 +7,7 @@ filetype off
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-Plugin 'gmarik/Vundle.vim'
+Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-eunuch'
@@ -41,24 +41,27 @@ Plugin 'tomtom/tcomment_vim'
 Plugin 'machakann/vim-textobj-delimited'
 Plugin 'rizzatti/dash.vim'
 Plugin 'gorkunov/smartpairs.vim'
-Plugin 'AlessandroYorba/Alduin'
 
 " Test Run
 Plugin 'terryma/vim-expand-region'
 Plugin 'AndrewRadev/splitjoin.vim'
-Plugin 'kien/ctrlp.vim'
+" Plugin 'kien/ctrlp.vim'
+Plugin 'wincent/command-t'
 Plugin 'scrooloose/nerdtree'
 Plugin 'mxw/vim-jsx'
 Plugin 'NLKNguyen/papercolor-theme'
 Plugin 'kana/vim-textobj-user'
 Plugin 'nelstrom/vim-textobj-rubyblock'
 Plugin 'ervandew/supertab'
+Plugin 'tpope/vim-vinegar'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'Yggdroot/indentLine'
 
 " Colour Themes
 Plugin 'joshdick/onedark.vim'
 Plugin 'altercation/vim-colors-solarized'
-
-Plugin 'lyokha/vim-xkbswitch'
+Plugin 'gosukiwi/vim-atom-dark'
+Plugin 'GertjanReynaert/cobalt2-vim-theme'
 
 call vundle#end()
 filetype plugin indent on
@@ -133,7 +136,6 @@ if has("autocmd")
     autocmd BufRead,BufNewFile *.asc setfiletype asciidoc
 
     au BufNewFile,BufReadPost *.md set filetype=markdown
-    let g:markdown_fenced_languages = ['coffee', 'css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml', 'html']
   augroup END
 endif
 
@@ -150,6 +152,9 @@ imap <c-e> <esc>A
 nnoremap <leader>em :!open -a 'Marked 2.app' '%:p'<cr>
 nnoremap <leader>ev :tabnew ~/.vimrc<cr>
 nnoremap <leader>es :split<cr>:UltiSnipsEdit<cr>
+
+" UltiSnips
+let g:UltiSnipsExpandTrigger="<c-l>"
 
 " create/open file in current folder
 map <Leader>ee :e <C-R>=escape(expand("%:p:h"),' ') . '/'<CR>
@@ -170,17 +175,21 @@ noremap <Leader>D :bufdo bd<CR>
 cnoremap %% <C-R>=expand("%:p:h") . "/" <CR>
 
 " CtrlP plugin
-nnoremap <leader>f :CtrlP<cr>
-nnoremap <leader>w :CtrlP app/assets/javascripts<cr>
-nnoremap <leader>. :CtrlPBuffer<cr>
-nnoremap <leader>p :CtrlPClearCache<cr>
-nnoremap <leader>gc :CtrlP app/controllers<cr>
-nnoremap <leader>gv :CtrlP app/views<cr>
-nnoremap <leader>gm :CtrlP app/models<cr>
-nnoremap <leader>gs :CtrlP app/services<cr>
-nnoremap <leader>gr :CtrlP spec<cr>
-nnoremap <leader>gt :CtrlP ~/Dropbox/gollum<cr>
-nnoremap <leader>gp :CtrlP <C-R>=expand("%:p:h") . "/"<cr><cr>
+" nnoremap <leader>f :CtrlP<cr>
+" nnoremap <leader>w :CtrlP app/assets/javascripts<cr>
+" nnoremap <leader>. :CtrlPBuffer<cr>
+" nnoremap <leader>p :CtrlPClearCache<cr>
+" nnoremap <leader>gc :CtrlP app/controllers<cr>
+" nnoremap <leader>gv :CtrlP app/views<cr>
+" nnoremap <leader>gm :CtrlP app/models<cr>
+" nnoremap <leader>gs :CtrlP app/services<cr>
+" nnoremap <leader>gr :CtrlP spec<cr>
+" nnoremap <leader>gt :CtrlP ~/Dropbox/gollum<cr>
+" nnoremap <leader>gp :CtrlP <C-R>=expand("%:p:h") . "/"<cr><cr>
+
+" Command-T
+nnoremap <leader>f :CommandT<cr>
+nnoremap <leader>. :CommandTBuffer<cr>
 
 nnoremap <leader>z :Gstatus<CR><C-w>20+
 
@@ -205,6 +214,9 @@ cnoremap $m <CR>:m''<CR>
 cnoremap $M <CR>:M''<CR>
 cnoremap $d <CR>:d<CR>``
 
+" saves cursor after yanking in visual mode
+vnoremap y myy`y
+vnoremap Y myY`y
 " =============================================================
 "                 PLUGINS CONFIGURATION
 " =============================================================
@@ -226,6 +238,7 @@ let g:airline_theme='papercolor'
 
 " Markdown
 let g:vim_markdown_folding_disabled=1
+let g:vim_markdown_fenced_languages = ['html', 'js=javascript', 'ruby']
 
 " CtrlP
 let g:ctrlp_working_path_mode='a'
@@ -240,23 +253,14 @@ nmap <silent> <leader>l :TestLast<CR>
 
 " JSX
 let g:jsx_ext_required = 0
-let javascript_enable_domhtmlcss = 1
-
-let g:XkbSwitchEnabled = 1
-let g:XkbSwitchIMappings = ['ru']
-let g:XkbSwitchIMappingsTr = {
-            \ 'ru':
-            \ {'<': 'qwfpgjluy;[]arstdhneio''\zxcvbkm,.`/'.
-            \       'QWFPGJLUY:{}ARSTDHNEIO"ZXCVBKM<>?~@#$^&|',
-            \  '>': 'йцукенгшщзхъфывапролджэячсмитьбюё.'.
-            \       'ЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ,Ё"№;:?/'},
-            \ }
+let g:javascript_enable_domhtmlcss = 1
+let g:used_javascript_libs = 'underscore,react,chai'
 
 " =============================================================
 "                      APPEARENCE
 " =============================================================
 
-set term=xterm
+"set term=xterm
 set t_Co=256
 let &t_AB="\e[48;5;%dm"
 let &t_AF="\e[38;5;%dm"
@@ -266,14 +270,13 @@ let &t_AF="\e[38;5;%dm"
 " let &t_SR = "\<Esc>]50;CursorShape=2\x7"
 " let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 
-" colorscheme smyck
-" colorscheme onedark
-colorscheme solarized
+colorscheme cobalt2
+set background=dark
 
 if has("gui_running")
-  " set guifont=Source\ Code\ Pro\ for\ Powerline:h14
-  set guifont=Ubuntu\ Mono\ derivative\ Powerline:h16
+  set guifont=Source\ Code\ Pro\ for\ Powerline:h16
   set linespace=2
+  set guioptions-=r
 endif
 
 " =============================================================
@@ -319,3 +322,26 @@ function! <SID>StripTrailingWhitespaces()
 endfun
 
 " set langmap=йцукенгшщзхъфывапролджэячсмитьбю;qwfpgjluy\\;[]arstdhneio'zxcvbkm\\,.
+
+" abbrevs for Star Wars
+iabbrev dgre &#246;
+iabbrev dred &#243;
+iabbrev dpur &#245;
+iabbrev dyel &#244;
+iabbrev dfor &#247;
+iabbrev dbla &#241;
+iabbrev dblu &#242;
+
+iabbrev dlig &#248;
+iabbrev ddar &#249;
+iabbrev ddes &#250;
+iabbrev dadv &#251;
+iabbrev dfai &#253;
+iabbrev dsuc &#255;
+iabbrev dthr &#252;
+iabbrev dtri &#254;
+
+let @y=':%s/“/"/g'
+let @u=':%s/”/"/g'
+let @l=':%s/’/''/g'
+let @j=':%s/—/-/g'

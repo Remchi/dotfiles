@@ -1,148 +1,49 @@
-snippet iife
-(function() {
-  'use strict';
-
-	$0
-
-})();
-endsnippet
-
-snippet ngcon
-angular.module('$1').controller('$2', $2);
-
-$2.$inject = [$3];
-
-function $2(`!p snip.rv = t[3].replace("'", "")`) {
-	var vm = this;
-
-	$0
-
-	activate();
-
-	//////////////////////
-	function activate() {
-	}
-
-}
-endsnippet
-
-snippet ngfac
-angular.module('$1').factory('$2', $2);
-
-$2.$inject = [$3];
-
-function $2(`!p snip.rv = t[3].replace("'", "")`) {
-	$0
-}
-endsnippet
-
-snippet ngmod
-(function() {
-  'use strict';
-
-  angular.module('$1', [$0]);
-})();
-endsnippet
-
-snippet ngroute
-angular.module('$1').config($2);
-
-$2.$inject = ['$stateProvider'$3];
-
-function $2($stateProvider`!p snip.rv = t[3].replace("'", "")`) {
-
-	$stateProvider.state('$4', {
-		$0
-	});
-
-}
-endsnippet
-
-snippet cl
-console.log('$0');
-endsnippet
-
-snippet emsec
-ENV.contentSecurityPolicy = {
-	'default-src': "'none'",
-	'script-src': "'self'",
-	'font-src': "'self' http://fonts.gstatic.com",
-	'connect-src': "'self'",
-	'img-src': "'self' data:",
-	'style-src': "'self' 'unsafe-inline' http://fonts.googleapis.com",
-	'media-src': "'self'"
-};
-endsnippet
-
-snippet	rcon
+snippet ccom "Class React Component" bA
 import React from 'react';
-import AltContainer from 'alt/AltContainer';
-import ${1:ComponentName} from './$1';
-import $1Store from '../../stores/$1Store';
 
-export default class $1Container extends React.Component {
-  render() {
-    return (
-      <AltContainer store={$1Store}>
-				<$1$0 />
-      </AltContainer>
-    );
-  }
-}
-endsnippet
-
-snippet rcom
-import React from 'react';
-import ${1:ComponentName}Actions from '../../actions/$1Actions';
-
-export default class $1 extends React.Component {
-  render() {
-    return (
-      <div>
+class $1 extends React.Component {
+	render() {
+		return (
+			<${2:div}>
 				$0
-      </div>
-    );
-  }
-}
-endsnippet
-
-snippet ract
-import alt from '../alt';
-import api from '../utils/${1:ComponentName}Api';
-
-class $1Actions {
-	$0
+			</$2>
+		);
+	}
 }
 
-export default alt.createActions($1Actions);
+export default $1;
 endsnippet
 
-snippet rapi
-import request from 'superagent-bluebird-promise';
-
-var Api = {
-
-	$0
-
-};
-
-export default Api;
+snippet reim "React import" bA
+import React from 'react';$0
 endsnippet
 
-snippet rstore
-import alt from '../alt';
-import actions from '../actions/${1:ComponentName}Actions';
-import _ from 'lodash';
+snippet nimp "Import" bA
+import $1 from '$2';$0
+endsnippet
 
-class $1Store {
-  constructor() {
-		$0
-    this.bindListeners({
-      // handleFetchApplications: actions.FETCH_APPLICATIONS,
-    });
-  }
+snippet rred "Reducer definition" bA
+export default (state = $1, action = {}) => {
+	switch(action.type) {
+		default: return state;
+	}
+}$0
+endsnippet
 
-}
+snippet rconst "Redux Action Type Constant" bA
+export const ${1:CONSTANT_NAME} = '$1';$0
+endsnippet
 
-export default alt.createStore($1Store, '$1Store');
+snippet pt "React Prop Types" b
+React.PropTypes.$0
+endsnippet
+
+snippet eroute "Express Route" bA
+import express from 'express';
+
+let router = express.Router();
+
+$0
+
+export default router;
 endsnippet
