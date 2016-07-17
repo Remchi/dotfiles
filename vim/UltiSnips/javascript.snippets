@@ -34,8 +34,12 @@ snippet rconst "Redux Action Type Constant" bA
 export const ${1:CONSTANT_NAME} = '$1';$0
 endsnippet
 
-snippet pt "React Prop Types" b
+snippet pt "React Prop Types" w
 React.PropTypes.$0
+endsnippet
+
+snippet eb "Bind function to this in constructor" w
+this.$1 = this.$1.bind(this);$0
 endsnippet
 
 snippet eroute "Express Route" bA
@@ -46,4 +50,16 @@ let router = express.Router();
 $0
 
 export default router;
+endsnippet
+
+snippet ssee "Seed Template" bA
+exports.seed = function(knex, Promise) {
+	const tableName = '$1';
+
+	const items = [
+		$0
+	];
+
+	knex(tableName).del().insert(items).into(tableName);
+};
 endsnippet
