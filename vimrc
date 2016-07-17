@@ -55,7 +55,7 @@ Plugin 'nelstrom/vim-textobj-rubyblock'
 Plugin 'ervandew/supertab'
 Plugin 'tpope/vim-vinegar'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'Yggdroot/indentLine'
+" Plugin 'Yggdroot/indentLine'
 
 " Colour Themes
 Plugin 'joshdick/onedark.vim'
@@ -255,6 +255,9 @@ nmap <silent> <leader>l :TestLast<CR>
 let g:jsx_ext_required = 0
 let g:javascript_enable_domhtmlcss = 1
 let g:used_javascript_libs = 'underscore,react,chai'
+
+" let g:indentLine_noConcealCursor=""
+" let g:vim_json_syntax_conceal = 0
 
 " =============================================================
 "                      APPEARENCE
