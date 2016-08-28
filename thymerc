@@ -1,0 +1,13 @@
+set :timer, 25*60              # 25 minute pomodoros
+set :timer_break, 5*60         # 5 minute breaks
+set :warning, 5*60             # show warning color in tmux at <5 minutes, 0 to disable
+set :warning_color, 'red,bold' # warning color for tmux is red/bold
+set :break_color, 'blue'       # break color is blue
+set :interval, 1               # refresh timer every 1 second
+set :tmux, true                # turn on tmux integration
+# set :tmux_theme, "#[fg=mycolor,bg=mycolor]#[fg=%s]%s#[fg=mycolor,bg=mycolor]"
+
+# execute hook after each pomodoro
+after do |seconds_left|
+  `terminal-notifier -message "Thyme's Up!"` if seconds_left == 0
+end

@@ -33,9 +33,10 @@ Plugin 'janko-m/vim-test'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mustache/vim-mustache-handlebars'
+Plugin 'digitaltoad/vim-pug'
 
 Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
+" Plugin 'plasticboy/vim-markdown'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'machakann/vim-textobj-delimited'
@@ -43,19 +44,16 @@ Plugin 'rizzatti/dash.vim'
 Plugin 'gorkunov/smartpairs.vim'
 
 " Test Run
-Plugin 'terryma/vim-expand-region'
 Plugin 'AndrewRadev/splitjoin.vim'
-" Plugin 'kien/ctrlp.vim'
-Plugin 'wincent/command-t'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'mxw/vim-jsx'
-Plugin 'NLKNguyen/papercolor-theme'
 Plugin 'kana/vim-textobj-user'
 Plugin 'nelstrom/vim-textobj-rubyblock'
 Plugin 'ervandew/supertab'
 Plugin 'tpope/vim-vinegar'
 Plugin 'Valloric/YouCompleteMe'
-" Plugin 'Yggdroot/indentLine'
+Plugin 'tmux-plugins/vim-tmux-focus-events'
 
 " Colour Themes
 Plugin 'joshdick/onedark.vim'
@@ -152,6 +150,7 @@ imap <c-e> <esc>A
 nnoremap <leader>em :!open -a 'Marked 2.app' '%:p'<cr>
 nnoremap <leader>ev :tabnew ~/.vimrc<cr>
 nnoremap <leader>es :split<cr>:UltiSnipsEdit<cr>
+nnoremap <leader>eN :split<cr>:e ~/Dropbox/Content/notes.md<cr>
 
 " UltiSnips
 let g:UltiSnipsExpandTrigger="<c-l>"
@@ -160,7 +159,7 @@ let g:UltiSnipsExpandTrigger="<c-l>"
 map <Leader>ee :e <C-R>=escape(expand("%:p:h"),' ') . '/'<CR>
 
 nnoremap <silent> <space> :nohl<Bar>:echo<CR>
-nnoremap <leader>m mzyyp`zj
+nnoremap <leader>w mzyyp`zj
 nnoremap <leader>v :set invpaste paste?<CR>
 nnoremap <leader>V V`]
 nmap k gk
@@ -175,10 +174,10 @@ noremap <Leader>D :bufdo bd<CR>
 cnoremap %% <C-R>=expand("%:p:h") . "/" <CR>
 
 " CtrlP plugin
-" nnoremap <leader>f :CtrlP<cr>
+nnoremap <leader>f :CtrlP<cr>
+nnoremap <leader>. :CtrlPBuffer<cr>
+nnoremap <leader>p :CtrlPClearCache<cr>
 " nnoremap <leader>w :CtrlP app/assets/javascripts<cr>
-" nnoremap <leader>. :CtrlPBuffer<cr>
-" nnoremap <leader>p :CtrlPClearCache<cr>
 " nnoremap <leader>gc :CtrlP app/controllers<cr>
 " nnoremap <leader>gv :CtrlP app/views<cr>
 " nnoremap <leader>gm :CtrlP app/models<cr>
@@ -188,8 +187,9 @@ cnoremap %% <C-R>=expand("%:p:h") . "/" <CR>
 " nnoremap <leader>gp :CtrlP <C-R>=expand("%:p:h") . "/"<cr><cr>
 
 " Command-T
-nnoremap <leader>f :CommandT<cr>
-nnoremap <leader>. :CommandTBuffer<cr>
+" nnoremap <leader>f :CommandT<cr>
+" nnoremap <leader>. :CommandTBuffer<cr>
+" nnoremap <leader>p :CommandTFlush<cr>
 
 nnoremap <leader>z :Gstatus<CR><C-w>20+
 
@@ -217,6 +217,21 @@ cnoremap $d <CR>:d<CR>``
 " saves cursor after yanking in visual mode
 vnoremap y myy`y
 vnoremap Y myY`y
+
+" vim test
+nmap <silent> <leader>t :TestNearest<CR>
+nmap <silent> <leader>T :TestFile<CR>
+nmap <silent> <leader>a :TestSuite<CR>
+nmap <silent> <leader>l :TestLast<CR>
+nmap <silent> <leader>g :TestVisit<CR>
+
+let g:test#javascript#mocha#executable = 'NODE_ENV=test mocha'
+let g:test#rspec#executable = 'bin/rspec'
+let g:test#javascript#mocha#options = {
+  \ 'nearest': '--require babel-register',
+  \ 'file':    '--require babel-register',
+  \ 'suite':   'NODE_ENV=test',
+\}
 " =============================================================
 "                 PLUGINS CONFIGURATION
 " =============================================================
@@ -237,27 +252,20 @@ let g:airline_powerline_fonts = 1
 let g:airline_theme='papercolor'
 
 " Markdown
-let g:vim_markdown_folding_disabled=1
-let g:vim_markdown_fenced_languages = ['html', 'js=javascript', 'ruby']
+let g:markdown_fenced_languages = ['coffee', 'css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml']
 
 " CtrlP
 let g:ctrlp_working_path_mode='a'
 set wildignore+=**/bower_components/*,**/node_modules/*,**/tmp/*,**/assets/images/*,**/assets/fonts/*,**/public/images/*
-
-" vim-test
-nmap <silent> <leader>t :TestNearest<CR>
-nmap <silent> <leader>T :TestFile<CR>
-nmap <silent> <leader>a :TestSuite<CR>
-nmap <silent> <leader>l :TestLast<CR>
-" let g:test#rspec#executable = 'bin/rspec'
 
 " JSX
 let g:jsx_ext_required = 0
 let g:javascript_enable_domhtmlcss = 1
 let g:used_javascript_libs = 'underscore,react,chai'
 
-" let g:indentLine_noConcealCursor=""
-" let g:vim_json_syntax_conceal = 0
+" YouCompleteMe
+" remove markdown files from black list
+let g:ycm_filetype_blacklist={'notes': 1, 'unite': 1, 'tagbar': 1, 'pandoc': 1, 'qf': 1, 'vimwiki': 1, 'text': 1, 'infolog': 1, 'mail': 1}
 
 " =============================================================
 "                      APPEARENCE
@@ -327,24 +335,29 @@ endfun
 " set langmap=йцукенгшщзхъфывапролджэячсмитьбю;qwfpgjluy\\;[]arstdhneio'zxcvbkm\\,.
 
 " abbrevs for Star Wars
-iabbrev dgre &#246;
-iabbrev dred &#243;
-iabbrev dpur &#245;
-iabbrev dyel &#244;
-iabbrev dfor &#247;
-iabbrev dbla &#241;
-iabbrev dblu &#242;
+" iabbrev dgre &#246;
+" iabbrev dred &#243;
+" iabbrev dpur &#245;
+" iabbrev dyel &#244;
+" iabbrev dfor &#247;
+" iabbrev dbla &#241;
+" iabbrev dblu &#242;
+"
+" iabbrev dlig &#248;
+" iabbrev ddar &#249;
+" iabbrev ddes &#250;
+" iabbrev dadv &#251;
+" iabbrev dfai &#253;
+" iabbrev dsuc &#255;
+" iabbrev dthr &#252;
+" iabbrev dtri &#254;
+"
+" let @y=':%s/“/"/g'
+" let @u=':%s/”/"/g'
+" let @l=':%s/’/''/g'
+" let @j=':%s/—/-/g'
 
-iabbrev dlig &#248;
-iabbrev ddar &#249;
-iabbrev ddes &#250;
-iabbrev dadv &#251;
-iabbrev dfai &#253;
-iabbrev dsuc &#255;
-iabbrev dthr &#252;
-iabbrev dtri &#254;
+let @n='y:newi```pkdd:set ft=markdowngg[ Ajs'
+let @e='ggVG: w! >> ~/Dropbox/Content/notes.md:bd!'
+nnoremap <leader>en :new +set\ ft=markdown<cr>o
 
-let @y=':%s/“/"/g'
-let @u=':%s/”/"/g'
-let @l=':%s/’/''/g'
-let @j=':%s/—/-/g'

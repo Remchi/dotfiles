@@ -14,6 +14,16 @@ class $1 extends React.Component {
 export default $1;
 endsnippet
 
+snippet fcom "Functional Component" bA
+import React from 'react';
+
+export default () => {
+	return (
+		$0
+	);
+}
+endsnippet
+
 snippet reim "React import" bA
 import React from 'react';$0
 endsnippet
@@ -62,4 +72,14 @@ exports.seed = function(knex, Promise) {
 
 	knex(tableName).del().insert(items).into(tableName);
 };
+endsnippet
+
+snippet eend "Express Endpoint" bA
+router.${1:get}('${2:/}', (req, res) => {
+	$0
+});
+endsnippet
+
+snippet bimp "Import Bootstrap Component" bA
+import $1 from 'react-bootstrap/lib/$1';$0
 endsnippet
