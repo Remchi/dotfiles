@@ -54,6 +54,7 @@ Plugin 'ervandew/supertab'
 Plugin 'tpope/vim-vinegar'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'tmux-plugins/vim-tmux-focus-events'
+Plugin 'tpope/vim-obsession'
 
 " Colour Themes
 Plugin 'joshdick/onedark.vim'

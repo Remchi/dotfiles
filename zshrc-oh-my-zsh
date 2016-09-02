@@ -9,13 +9,9 @@ export LC_ALL=en_US.UTF-8
 
 alias e="/Applications/Emacs.app/Contents/MacOS/Emacs"
 alias v="/usr/local/bin/vim"
-alias nv="/usr/local/bin/nvim"
 alias be="bundle exec"
 alias cdfg="cd '/Users/rem/Library/Application Support/Steam/steamapps/common/Fantasy Grounds/FantasyGrounds.app/Contents/Resources/drive_c/users/Wineskin/Application Data/Fantasy Grounds'"
 alias fix="git diff --name-only | uniq | xargs s"
-alias tmscr="tmux -f ~/.dotfiles/tmux-projects/react-screencasts.conf attach"
-alias tmred="tmux -f ~/.dotfiles/tmux-projects/reddice.conf attach"
-alias tmcon="tmux -f ~/.dotfiles/tmux-projects/content.conf attach"
 alias vcon="cd ~/Dropbox/Content; v"
 alias gres="git reset --hard HEAD; git clean -df"
 
