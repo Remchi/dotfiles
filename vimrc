@@ -24,7 +24,8 @@ Plugin 'mattn/emmet-vim'
 Plugin 'rbgrouleff/bclose.vim'
 Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'jiangmiao/auto-pairs'
+" Plugin 'jiangmiao/auto-pairs'
+Plugin 'cohama/lexima.vim'
 Plugin 'Lokaltog/vim-easymotion'
 
 Plugin 'SirVer/ultisnips'
@@ -52,15 +53,20 @@ Plugin 'kana/vim-textobj-user'
 Plugin 'nelstrom/vim-textobj-rubyblock'
 Plugin 'ervandew/supertab'
 Plugin 'tpope/vim-vinegar'
-Plugin 'Valloric/YouCompleteMe'
+" Plugin 'Valloric/YouCompleteMe'
 Plugin 'tmux-plugins/vim-tmux-focus-events'
 Plugin 'tpope/vim-obsession'
+Plugin 'othree/html5.vim'
+Plugin 'jceb/vim-orgmode'
+Plugin 'flowtype/vim-flow'
+Plugin 'andreypopp/vim-flow-outline'
 
 " Colour Themes
 Plugin 'joshdick/onedark.vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'gosukiwi/vim-atom-dark'
 Plugin 'GertjanReynaert/cobalt2-vim-theme'
+Plugin 'trevordmiller/nova-vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -116,6 +122,8 @@ set noesckeys
 set ttimeout
 set ttimeoutlen=1
 set listchars=tab:>-,trail:~,extends:>,precedes:<,space:.
+
+set path+=**
 " =============================================================
 "                    AUTOCOMMANDS
 " =============================================================
@@ -144,6 +152,9 @@ endif
 
 let mapleader = ","
 
+inoremap <c-t> <ESC>
+vnoremap <c-t> <ESC>
+
 " insert mode
 imap <c-e> <esc>A
 
@@ -167,7 +178,6 @@ nmap k gk
 nmap j gj
 nnoremap H ^
 nnoremap E $
-inoremap <C-n> <C-j>
 
 noremap <Leader>d :Bclose<CR>
 noremap <Leader>D :bufdo bd<CR>
@@ -286,7 +296,7 @@ colorscheme cobalt2
 set background=dark
 
 if has("gui_running")
-  set guifont=Source\ Code\ Pro\ for\ Powerline:h16
+  set guifont=Source\ Code\ Pro:h16
   set linespace=2
   set guioptions-=r
 endif
