@@ -67,6 +67,8 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'gosukiwi/vim-atom-dark'
 Plugin 'GertjanReynaert/cobalt2-vim-theme'
 Plugin 'trevordmiller/nova-vim'
+Plugin 'kristijanhusak/vim-hybrid-material'
+Plugin 'jdkanani/vim-material-theme'
 
 call vundle#end()
 filetype plugin indent on
@@ -143,6 +145,8 @@ if has("autocmd")
     autocmd BufRead,BufNewFile *.asc setfiletype asciidoc
 
     au BufNewFile,BufReadPost *.md set filetype=markdown
+
+    autocmd FileType javascript set formatprg=prettier\ --stdin
   augroup END
 endif
 

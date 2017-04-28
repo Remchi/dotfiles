@@ -1,9 +1,10 @@
 eval "$(rbenv init -)"
 
 export TERM=xterm-256color
-export BUNDLER_EDITOR="atom"
+export BUNDLER_EDITOR="s"
 export EDITOR="/usr/local/bin/vim"
 
+export LANG=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
@@ -14,6 +15,8 @@ alias cdfg="cd '/Users/rem/Library/Application Support/Steam/steamapps/common/Fa
 alias fix="git diff --name-only | uniq | xargs s"
 alias vcon="cd ~/Dropbox/Content; v"
 alias gres="git reset --hard HEAD; git clean -df"
+alias plexstop="sudo launchctl unload /Library/LaunchDaemons/com.plex.plexconnect.bash.plist"
+alias plexstart="sudo launchctl load /Library/LaunchDaemons/com.plex.plexconnect.bash.plist"
 
 funciton t() {
   tree -I '.git|node_modules|bower_components|.DS_Store' --dirsfirst --filelimit 15 -L ${1:-3} -aC $2
@@ -62,7 +65,7 @@ ZSH_THEME="cobalt2"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git)
+plugins=(git zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -79,3 +82,6 @@ source $ZSH/oh-my-zsh.sh
 # export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.4/bin
 
 # PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
+export NVM_DIR="/Users/rem/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
