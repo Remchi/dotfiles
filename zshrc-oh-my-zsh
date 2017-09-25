@@ -17,6 +17,7 @@ alias vcon="cd ~/Dropbox/Content; v"
 alias gres="git reset --hard HEAD; git clean -df"
 alias plexstop="sudo launchctl unload /Library/LaunchDaemons/com.plex.plexconnect.bash.plist"
 alias plexstart="sudo launchctl load /Library/LaunchDaemons/com.plex.plexconnect.bash.plist"
+alias ss="s ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/Snippets"
 
 funciton t() {
   tree -I '.git|node_modules|bower_components|.DS_Store' --dirsfirst --filelimit 15 -L ${1:-3} -aC $2
@@ -85,3 +86,8 @@ source $ZSH/oh-my-zsh.sh
 
 export NVM_DIR="/Users/rem/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/platform-tools
