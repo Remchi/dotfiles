@@ -19,56 +19,47 @@ Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-abolish'
 Plugin 'vim-ruby/vim-ruby'
-Plugin 'mattn/emmet-vim'
-
+Plugin 'mattn/emmet-vim', { 'for': ['javascript.jsx', 'html', 'css'] }
+Plugin 'prettier/vim-prettier'
+Plugin 'w0rp/ale'
 Plugin 'rbgrouleff/bclose.vim'
-Plugin 'bling/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-" Plugin 'jiangmiao/auto-pairs'
 Plugin 'cohama/lexima.vim'
 Plugin 'Lokaltog/vim-easymotion'
-
 Plugin 'SirVer/ultisnips'
-Plugin 'janko-m/vim-test'
-
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'pangloss/vim-javascript'
-Plugin 'mustache/vim-mustache-handlebars'
-Plugin 'digitaltoad/vim-pug'
-
-Plugin 'godlygeek/tabular'
-" Plugin 'plasticboy/vim-markdown'
 Plugin 'terryma/vim-multiple-cursors'
-Plugin 'tomtom/tcomment_vim'
-Plugin 'machakann/vim-textobj-delimited'
-Plugin 'rizzatti/dash.vim'
 Plugin 'gorkunov/smartpairs.vim'
-
-" Test Run
-Plugin 'AndrewRadev/splitjoin.vim'
+Plugin 'pangloss/vim-javascript'
+Plugin 'digitaltoad/vim-pug'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
-Plugin 'mxw/vim-jsx'
-Plugin 'kana/vim-textobj-user'
-Plugin 'nelstrom/vim-textobj-rubyblock'
+Plugin 'mxw/vim-jsx', { 'for': ['jsx','javascript.jsx']}
+Plugin 'tpope/vim-commentary' " or Plugin 'tomtom/tcomment_vim'
 Plugin 'ervandew/supertab'
-Plugin 'tpope/vim-vinegar'
-" Plugin 'Valloric/YouCompleteMe'
-Plugin 'tmux-plugins/vim-tmux-focus-events'
-Plugin 'tpope/vim-obsession'
 Plugin 'othree/html5.vim'
-Plugin 'jceb/vim-orgmode'
-Plugin 'flowtype/vim-flow'
-Plugin 'andreypopp/vim-flow-outline'
 
 " Colour Themes
-Plugin 'joshdick/onedark.vim'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'gosukiwi/vim-atom-dark'
 Plugin 'GertjanReynaert/cobalt2-vim-theme'
-Plugin 'trevordmiller/nova-vim'
-Plugin 'kristijanhusak/vim-hybrid-material'
-Plugin 'jdkanani/vim-material-theme'
+Plugin 'morhetz/gruvbox'
+Plugin 'romainl/flattened'
+
+" Writing
+Plugin 'reedes/vim-pencil'
+Plugin 'junegunn/limelight.vim'
+Plugin 'junegunn/goyo.vim'
+Plugin 'reedes/vim-colors-pencil'
+
+" Test Run
+Plugin 'djoshea/vim-autoread'
+Plugin 'junegunn/fzf' " vs CtrlP
+Plugin 'junegunn/fzf.vim'
+Plugin 'matze/vim-move'
+Plugin 'AndrewRadev/splitjoin.vim'
+Plugin 'kana/vim-textobj-user'
+Plugin 'nelstrom/vim-textobj-rubyblock'
+Plugin 'tpope/vim-obsession'
+Plugin 'xtal8/traces.vim'
+Plugin 'lyokha/vim-xkbswitch'
+Plugin 'altercation/vim-colors-solarized'
 
 call vundle#end()
 filetype plugin indent on
@@ -101,6 +92,7 @@ set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set expandtab
+set regexpengine=1
 set relativenumber
 set number
 set wrap
@@ -120,12 +112,15 @@ set noswapfile
 set wildmenu
 set nostartofline
 " (Hopefully) removes the delay when hitting esc in insert mode
-set noesckeys
+" set noesckeys
 set ttimeout
 set ttimeoutlen=1
 set listchars=tab:>-,trail:~,extends:>,precedes:<,space:.
+set ttyfast
+set lazyredraw
 
 set path+=**
+set tags=./tags;/
 " =============================================================
 "                    AUTOCOMMANDS
 " =============================================================
@@ -141,8 +136,8 @@ if has("autocmd")
 
     autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
     autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
-
-    autocmd BufRead,BufNewFile *.asc setfiletype asciidoc
+    autocmd BufWinLeave *.* mkview
+    autocmd BufWinEnter *.* silent loadview
 
     au BufNewFile,BufReadPost *.md set filetype=markdown
 
@@ -156,20 +151,17 @@ endif
 
 let mapleader = ","
 
-inoremap <c-t> <ESC>
-vnoremap <c-t> <ESC>
-
 " insert mode
-imap <c-e> <esc>A
+inoremap <c-e> <esc>A
 
 " Quick open most used files
 nnoremap <leader>em :!open -a 'Marked 2.app' '%:p'<cr>
-nnoremap <leader>ev :tabnew ~/.vimrc<cr>
-nnoremap <leader>es :split<cr>:UltiSnipsEdit<cr>
-nnoremap <leader>eN :split<cr>:e ~/Dropbox/Content/notes.md<cr>
+nnoremap <leader>ev :e ~/.vimrc<cr>
+nnoremap <leader>es :vs<cr>:UltiSnipsEdit<cr>
 
 " UltiSnips
-let g:UltiSnipsExpandTrigger="<c-l>"
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
 
 " create/open file in current folder
 map <Leader>ee :e <C-R>=escape(expand("%:p:h"),' ') . '/'<CR>
@@ -178,6 +170,7 @@ nnoremap <silent> <space> :nohl<Bar>:echo<CR>
 nnoremap <leader>w mzyyp`zj
 nnoremap <leader>v :set invpaste paste?<CR>
 nnoremap <leader>V V`]
+nnoremap <leader>I V`]=
 nmap k gk
 nmap j gj
 nnoremap H ^
@@ -189,38 +182,23 @@ noremap <Leader>D :bufdo bd<CR>
 cnoremap %% <C-R>=expand("%:p:h") . "/" <CR>
 
 " CtrlP plugin
-nnoremap <leader>f :CtrlP<cr>
-nnoremap <leader>. :CtrlPBuffer<cr>
-nnoremap <leader>p :CtrlPClearCache<cr>
-" nnoremap <leader>w :CtrlP app/assets/javascripts<cr>
-" nnoremap <leader>gc :CtrlP app/controllers<cr>
-" nnoremap <leader>gv :CtrlP app/views<cr>
-" nnoremap <leader>gm :CtrlP app/models<cr>
-" nnoremap <leader>gs :CtrlP app/services<cr>
-" nnoremap <leader>gr :CtrlP spec<cr>
-" nnoremap <leader>gt :CtrlP ~/Dropbox/gollum<cr>
-" nnoremap <leader>gp :CtrlP <C-R>=expand("%:p:h") . "/"<cr><cr>
+" nnoremap <leader>f :CtrlP<cr>
+" nnoremap <leader>. :CtrlPBuffer<cr>
+" nnoremap <leader>p :CtrlPClearCache<cr>
 
-" Command-T
-" nnoremap <leader>f :CommandT<cr>
-" nnoremap <leader>. :CommandTBuffer<cr>
-" nnoremap <leader>p :CommandTFlush<cr>
+" FZF
+nnoremap <leader>f :GFiles<cr>
+nnoremap <leader>F :Files<cr>
+nnoremap <leader>. :Buffers<cr>
 
-nnoremap <leader>z :Gstatus<CR><C-w>20+
+" Fugitive
+nnoremap <leader>z :Gstatus<CR>:only<CR>
 
+" Tabs
 nnoremap <leader>1 1gt<cr>
 nnoremap <leader>2 2gt<cr>
 nnoremap <leader>3 3gt<cr>
 nnoremap <leader>4 4gt<cr>
-
-" Rails plugin navigation
-" nnoremap <leader>gc :Econtroller
-" nnoremap <leader>gm :Emodel
-" nnoremap <leader>gv :Eview
-" nnoremap <leader>gr :Espec
-" nnoremap <leader>gj :Ejavascript
-" nnoremap <leader>gs :Eservice
-" nnoremap <leader>gi :Einitializer
 
 " inc search for range commands
 cnoremap $t <CR>:t''<CR>
@@ -233,20 +211,6 @@ cnoremap $d <CR>:d<CR>``
 vnoremap y myy`y
 vnoremap Y myY`y
 
-" vim test
-nmap <silent> <leader>t :TestNearest<CR>
-nmap <silent> <leader>T :TestFile<CR>
-nmap <silent> <leader>a :TestSuite<CR>
-nmap <silent> <leader>l :TestLast<CR>
-nmap <silent> <leader>g :TestVisit<CR>
-
-let g:test#javascript#mocha#executable = 'NODE_ENV=test mocha'
-let g:test#rspec#executable = 'bin/rspec'
-let g:test#javascript#mocha#options = {
-  \ 'nearest': '--require babel-register',
-  \ 'file':    '--require babel-register',
-  \ 'suite':   'NODE_ENV=test',
-\}
 " =============================================================
 "                 PLUGINS CONFIGURATION
 " =============================================================
@@ -261,13 +225,20 @@ nmap s <Plug>(easymotion-s)
 omap s <Plug>(easymotion-bd-t)
 vmap s <Plug>(easymotion-bd-t)
 
+" Vim Move
+let g:move_key_modifier = 'C'
+
+" Pencil
+let g:pencil_neutral_code_bg = 1
+let g:pencil_terminal_italics = 1
+
 " Airline
-let g:airline#extensions#tabline#enabled = 0
-let g:airline_powerline_fonts = 1
-let g:airline_theme='papercolor'
+" let g:airline#extensions#tabline#enabled = 0
+" let g:airline_powerline_fonts = 1
+" let g:airline_theme='papercolor'
 
 " Markdown
-let g:markdown_fenced_languages = ['coffee', 'css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml']
+let g:markdown_fenced_languages = ['css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml']
 
 " CtrlP
 let g:ctrlp_working_path_mode='a'
@@ -278,9 +249,38 @@ let g:jsx_ext_required = 0
 let g:javascript_enable_domhtmlcss = 1
 let g:used_javascript_libs = 'underscore,react,chai'
 
-" YouCompleteMe
-" remove markdown files from black list
-let g:ycm_filetype_blacklist={'notes': 1, 'unite': 1, 'tagbar': 1, 'pandoc': 1, 'qf': 1, 'vimwiki': 1, 'text': 1, 'infolog': 1, 'mail': 1}
+" Emmet
+let g:user_emmet_settings={'javascript.jsx': {'extends':'jsx'}}
+
+" Layout switcher
+let g:XkbSwitchLib = '/usr/local/lib/libInputSourceSwitcher.dylib'
+let g:XkbSwitchEnabled = 1
+
+" Prettier
+nmap <Leader>p <Plug>(Prettier)
+let g:prettier#exec_cmd_async = 1
+let g:prettier#config#print_width = 80
+let g:prettier#config#tab_width = 2
+let g:prettier#config#use_tabs = 'false'
+let g:prettier#config#semi = 'true'
+let g:prettier#config#single_quote = 'false'
+let g:prettier#config#bracket_spacing = 'true'
+let g:prettier#config#jsx_bracket_same_line = 'false'
+let g:prettier#config#trailing_comma = 'none'
+let g:prettier#config#parser = 'flow'
+let g:prettier#config#config_precedence = 'prefer-file'
+let g:prettier#config#prose_wrap = 'preserve'
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md PrettierAsync
+
+" Ale
+let g:ale_set_highlights = 0
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+let g:ale_linters = {
+\   'javascript': ['eslint'],
+\   'ruby': [],
+\}
 
 " =============================================================
 "                      APPEARENCE
@@ -291,35 +291,15 @@ set t_Co=256
 let &t_AB="\e[48;5;%dm"
 let &t_AF="\e[38;5;%dm"
 
-" Making cursor a bar in insert mode
-" let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-" let &t_SR = "\<Esc>]50;CursorShape=2\x7"
-" let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-
+" colorscheme cobalt2
 colorscheme cobalt2
 set background=dark
 
 if has("gui_running")
-  set guifont=Source\ Code\ Pro:h16
+  set guifont=Operator\ Mono:h14
   set linespace=2
   set guioptions-=r
 endif
-
-" =============================================================
-"                      PROJECTIONS
-" =============================================================
-
-let g:rails_projections = {
-      \ "app/services/*.rb": {
-      \   "command": "service",
-      \   "template":
-      \     ["class %S", "end"],
-      \   "test": [
-      \     "test/unit/%s_uploader_test.rb",
-      \     "spec/services/%s_spec.rb"
-      \   ],
-      \   "keywords": "process version"
-      \ }}
 
 " =============================================================
 "                      CUSTOM FUNCTIONS
@@ -347,32 +327,9 @@ function! <SID>StripTrailingWhitespaces()
     call cursor(l, c)
 endfun
 
-" set langmap=йцукенгшщзхъфывапролджэячсмитьбю;qwfpgjluy\\;[]arstdhneio'zxcvbkm\\,.
-
-" abbrevs for Star Wars
-" iabbrev dgre &#246;
-" iabbrev dred &#243;
-" iabbrev dpur &#245;
-" iabbrev dyel &#244;
-" iabbrev dfor &#247;
-" iabbrev dbla &#241;
-" iabbrev dblu &#242;
-"
-" iabbrev dlig &#248;
-" iabbrev ddar &#249;
-" iabbrev ddes &#250;
-" iabbrev dadv &#251;
-" iabbrev dfai &#253;
-" iabbrev dsuc &#255;
-" iabbrev dthr &#252;
-" iabbrev dtri &#254;
-"
-" let @y=':%s/“/"/g'
-" let @u=':%s/”/"/g'
-" let @l=':%s/’/''/g'
-" let @j=':%s/—/-/g'
-
-let @n='y:newi```pkdd:set ft=markdowngg[ Ajs'
-let @e='ggVG: w! >> ~/Dropbox/Content/notes.md:bd!'
-nnoremap <leader>en :new +set\ ft=markdown<cr>o
+nnoremap <leader>en :Files ~/Dropbox/MarkdownContent<CR>
+let @e = 'yGop:w'
+let @n = 'yGoi```jsP:wGzz'
+nnoremap <leader>c mmggVGy`m
+nnoremap <leader>x ggVGd
 

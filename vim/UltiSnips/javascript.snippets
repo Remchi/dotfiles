@@ -1,7 +1,7 @@
 snippet ccom "Class React Component" bA
 import React from 'react';
 
-class ${1:`Filename()`} extends React.Component {
+class ${1:`!p snip.rv = re.sub('\.js$', '', fn)`} extends React.Component {
 	render() {
 		return (
 			<${2:div}>
@@ -17,11 +17,13 @@ endsnippet
 snippet fcom "Functional Component" bA
 import React from 'react';
 
-export default () => {
-	return (
-		$0
-	);
-}
+const ${1:`!p snip.rv = re.sub('\.js$', '', fn)`} = (${2:props}) => (
+		<${3:div}>
+			$0
+		</$3>
+)
+
+export default $1;
 endsnippet
 
 snippet reim "React import" bA
@@ -32,25 +34,72 @@ snippet nimp "Import" bA
 import $1 from '$2';$0
 endsnippet
 
+snippet ipt "Import prop types" bA
+import PropTypes from 'prop-types';$0
+endsnippet
+
+snippet icon "Import Connect" bA
+import { connect } from 'react-redux';$0
+endsnippet
+
 snippet rred "Reducer definition" bA
-export default (state = $1, action = {}) => {
+export default function ${1:`!p snip.rv = re.sub('\.js$', '', fn)`}(state = {}, action = {}) {
 	switch(action.type) {
 		default: return state;
 	}
 }$0
 endsnippet
 
+snippet rthunk "Redux Thunk Action" bA
+export const $1 = (${2:data}) => (${3:dispatch}) => $0
+endsnippet
+
+snippet cdm "componentDidMount" bA
+componentDidMount() {
+	$0
+}
+endsnippet
+
 snippet rconst "Redux Action Type Constant" bA
 export const ${1:CONSTANT_NAME} = '$1';$0
 endsnippet
 
-snippet pt "React Prop Types" w
-React.PropTypes.$0
+snippet pts "React Prop Types String" A
+PropTypes.string.isRequired
 endsnippet
 
-snippet eb "Bind function to this in constructor" w
-this.$1 = this.$1.bind(this);$0
+snippet ptf "React Prop Types Function" A
+PropTypes.func.isRequired
 endsnippet
+
+snippet ptb "React Prop Types Boolean" A
+PropTypes.bool.isRequired
+endsnippet
+
+snippet pth "React Prop Types Shape" A
+PropTypes.shape({$0}).isRequired
+endsnippet
+
+snippet ptn "React Prop Number" A
+PropTypes.number.isRequired
+endsnippet
+
+snippet ptao "React Prop Types Array of Objects" A
+PropTypes.arrayOf(PropTypes.object).isRequired
+endsnippet
+
+snippet ptdef "React Prop Types Define" bA
+${1:`!p snip.rv = re.sub('\.js$', '', fn)`}.propTypes = {
+	$0
+}
+endsnippet
+
+snippet pttdef "React Prop Types Default" bA
+${1:`!p snip.rv = re.sub('\.js$', '', fn)`}.defaultProps = {
+	$0
+}
+endsnippet
+
 
 snippet eroute "Express Route" bA
 import express from 'express';
@@ -62,24 +111,242 @@ $0
 export default router;
 endsnippet
 
-snippet ssee "Seed Template" bA
-exports.seed = function(knex, Promise) {
-	const tableName = '$1';
-
-	const items = [
-		$0
-	];
-
-	knex(tableName).del().insert(items).into(tableName);
-};
-endsnippet
-
 snippet eend "Express Endpoint" bA
 router.${1:get}('${2:/}', (req, res) => {
 	$0
 });
 endsnippet
 
-snippet bimp "Import Bootstrap Component" bA
-import $1 from 'react-bootstrap/lib/$1';$0
+snippet cn "className" A
+className="$0"
+endsnippet
+
+snippet emod "Mongoose Model" bA
+import mongoose from "mongoose";
+
+const schema = new mongoose.Schema({$0});
+
+export default mongoose.model(${1:`!p snip.rv = re.sub('\.js$', '', fn)`}, schema);
+endsnippet
+
+snippet rmap "mapStateToProps" bA
+function mapStateToProps(state) {
+	return {$0}
+}
+endsnippet
+
+snippet c
+connect(${1:mapStateToProps}${2:, ${3:dispatch}})(${VISUAL})$0
+endsnippet
+
+snippet fsub "Form onSubmit" bA
+onSubmit = e => {
+	e.preventDefault();
+	const errors = this.validate(this.state.data);
+	this.setState({ errors });
+	if (Object.keys(errors).length === 0) {
+		this.setState({ loading: true });
+		this.props
+			.submit(this.state.data)
+			.catch(err =>
+				this.setState({ errors: err.response.data.errors, loading: false })
+			);
+	}
+};
+endsnippet
+
+snippet fval "Form Validate" bA
+validate = data => {
+	const errors = {};
+	$0
+	return errors;
+};
+endsnippet
+
+snippet fcha "Form onChange" bA
+onChangeString = e => {
+	this.setState({
+		data: { ...this.state.data, [e.target.name]: e.target.value }
+	});
+};
+endsnippet
+
+
+snippet bfg "Bootstrap Form group" bA
+<div className="form-group">
+	<label htmlFor="${1:field}">${2:Label}</label>
+	<input
+		id="${1:field}"
+		name="${1:field}"
+		type="text"
+		className={
+			errors.${1:field} ? "form-control is-invalid" : "form-control"
+		}
+		onChange={this.onChangeString}
+		value={data.${1:field}}
+	/>
+	{errors.${1:field} && (
+		<small className="form-text invalid-feedback">
+			{errors.${1:field}}
+		</small>
+	)}
+</div>
+endsnippet
+
+snippet bform "Bootstrap Form" bA
+import React from "react";
+import PropTypes from "prop-types";
+import isEmail from "validator/lib/isEmail";
+import FormButton from "../common/FormButton";
+
+class ${1:`!p snip.rv = re.sub('\.js$', '', fn)`} extends React.Component {
+  state = {
+    data: {},
+    errors: {},
+    loading: false
+  };
+
+  validate = data => {
+    const errors = {};
+    return errors;
+  };
+
+  onChangeString = e => {
+    this.setState({
+      data: { ...this.state.data, [e.target.name]: e.target.value }
+    });
+  };
+
+  onSubmit = e => {
+    e.preventDefault();
+    const errors = this.validate(this.state.data);
+    this.setState({ errors });
+    if (Object.keys(errors).length === 0) {
+      this.setState({ loading: true });
+      this.props
+        .submit(this.state.data)
+        .catch(err =>
+          this.setState({ errors: err.response.data.errors, loading: false })
+        );
+    }
+  };
+
+  render() {
+    const { data, errors, loading } = this.state;
+
+    return (
+      <div>
+        <form onSubmit={this.onSubmit}>
+          <FormButton label="Sign Up" loading={loading} />
+        </form>
+      </div>
+    );
+  }
+}
+
+$1.propTypes = {
+  submit: PropTypes.func.isRequired
+};
+
+export default $1;
+endsnippet
+
+snippet rssub "Redux Saga Form Submit" bA
+onSubmit = e => {
+	e.preventDefault();
+	const errors = this.validate(this.state.data);
+	this.setState({ errors });
+	if (Object.keys(errors).length === 0) {
+		this.props.submit(this.state.data);
+	}
+};
+endsnippet
+
+snippet rscwp "Redux Saga componentWillReceiveProps" bA
+componentWillReceiveProps(nextProps) {
+	this.setState({
+		errors: nextProps.serverErrors
+	});
+}
+endsnippet
+
+snippet rffocus "Redux Form Focus" bA
+componentDidMount() {
+	this.focus();
+}
+
+focus = () => this.${1:fieldname}.focus();
+endsnippet
+
+snippet rsbf "Redux Saga Bootstrap Form" bA
+import React from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import FormButton from "../common/FormButton";
+import { ${2:submitRequestAction} } from "../../actions/${3:actionFile}";
+
+class ${1:`!p snip.rv = re.sub('\.js$', '', fn)`} extends React.Component {
+  state = {
+    data: {},
+    errors: {}
+  };
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      errors: nextProps.serverErrors
+    });
+  }
+
+  validate = data => {
+    const errors = {};
+    return errors;
+  };
+
+  onChangeString = e => {
+    this.setState({
+      data: { ...this.state.data, [e.target.name]: e.target.value }
+    });
+  };
+
+  onSubmit = e => {
+    e.preventDefault();
+    const errors = this.validate(this.state.data);
+    this.setState({ errors });
+    if (Object.keys(errors).length === 0) {
+      this.props.submit(this.state.data);
+    }
+  };
+
+  render() {
+    const { data, errors } = this.state;
+    const { loading } = this.props;
+
+    return (
+      <div>
+        <form onSubmit={this.onSubmit}>
+          <FormButton label="Sign Up" loading={loading} />
+        </form>
+      </div>
+    );
+  }
+}
+
+$1.propTypes = {
+  submit: PropTypes.func.isRequired
+};
+
+function mapStateToProps(state) {
+  return {
+    serverErrors: state.formErrors.${4:serverErrors},
+    loading: state.loading.${5:loading}
+  };
+}
+
+export default connect(mapStateToProps, { submit: $2 })(
+  $1
+);
+endsnippet
+
+snippet fmes "Formatted Message Component" A
+<FormattedMessage id=\"$1\" defaultMessage=\"$2\" />
 endsnippet
