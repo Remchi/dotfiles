@@ -1,0 +1,144 @@
+let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
+argglobal
+let s:cpo_save=&cpo
+set cpo&vim
+imap <buffer> <SNR>31_ragtagOclose  ><Left><Left>
+inoremap <buffer> <SNR>31_ragtagOopen <%= 
+imap <buffer> & <Plug>ragtagXmlV
+imap <buffer> % <Plug>ragtagUrlV
+imap <buffer> & <Plug>ragtagXmlEncode
+imap <buffer> % <Plug>ragtagUrlEncode
+imap <buffer> " <NL>I<# A >F<NL>s
+imap <buffer> ' <#  >2hi
+inoremap <buffer> _ <NL>I<% A %>F<NL>s
+inoremap <buffer> - <%  %>2hi
+imap <buffer> ] <>O
+inoremap <buffer> > %>
+inoremap <buffer> < <%
+imap <buffer>  /
+inoremap <buffer> <nowait> <silent>  =lexima#insmode#escape()
+let &cpo=s:cpo_save
+unlet s:cpo_save
+setlocal keymap=
+setlocal noarabic
+setlocal autoindent
+setlocal backupcopy=
+setlocal balloonexpr=
+setlocal nobinary
+setlocal nobreakindent
+setlocal breakindentopt=
+setlocal bufhidden=
+setlocal buflisted
+setlocal buftype=
+setlocal nocindent
+setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
+setlocal cinoptions=
+setlocal cinwords=if,else,while,do,for,switch
+setlocal colorcolumn=
+setlocal comments=:#
+setlocal commentstring=<%#%s%>
+setlocal complete=.,w,b,u,t,i
+setlocal concealcursor=
+setlocal conceallevel=0
+setlocal completefunc=
+setlocal nocopyindent
+setlocal cryptmethod=
+setlocal nocursorbind
+setlocal nocursorcolumn
+setlocal nocursorline
+setlocal define=^\\s*def\\s\\+\\(self\\.\\)\\=\\|\\<id=[\"']\\=
+setlocal dictionary=
+setlocal nodiff
+setlocal equalprg=
+setlocal errorformat=%\\S%\\+\ \ %#%[cefi]%[rxod]%[eir]%[a-z]%#%\\x1b[0m\ %\\+%\\S%\\+%$%\\&%\\x1b%\\S%\\+\ \ %#%m%\\>%\\x1b[0m\ \ %#%f,%\\s\ %#%[cefi]%[rxod]%[eir]%[a-z]%#\ %\\+%\\S%\\+%$%\\&%\\s\ %#%m%\\>\ \ %#%f,\ %#Overwrite%.%#%\\S%\\+\ \ %#%m%\\x1b[0m\ \ %#%f,%-G\ %#Overwrite%.%#\"h\"%.%#,%+GStarted\ %\\u%\\u%.%#,%+GCompleted\ %\\d%\\d%\\d%.%#,%+G[ActiveJob]%.%#]\ Perform%.%#,%.%#rails\ test\ %f:%l,%+GCurrent\ version:%.%#,%+G\ %#Status\ %#Migration\ ID%.%#,%+G\ The\ fixture\ ID\ for\ %.%#,%f:\ %s\ (%m)%$%\\&%.%#/fixtures/%.%#(%\\d%\\+),%+G\ %#Prefix\ %#Verb%.%#,%+G\ %#Code\ LOC:\ %.%#,%+GAbout\ your\ application's\ environment,%+Grun\ %\\S%#::Application.routes,%+Irails\ %\\S%\\+%\\s%\\+#\ %.%#,%+Eruby:%.%#(LoadError),%+EUsage:%.%#,%+ECould\ not\ find\ generator%.%#,%+EType\ 'rails'\ for\ help.,%D(in\ %f),%\\s%#from\ %f:%l:%m,%\\s%#from\ %f:%l:,%\\s%##\ %f:%l:%m%\\&%.%#%\\D:%\\d%#:%.%#,%\\s%##\ %f:%l%\\&%.%#%\\D:%\\d%#,%\\s%#[%f:%l:\ %#%m%\\&%.%#%\\D:%\\d%#:%.%#,%\\s%#%f:%l:\ %#%m%\\&%.%#%\\D:%\\d%#:%.%#,%\\s%#%f:%l:,%m\ [%f:%l]:,%+Erake\ aborted!,%+EDon't\ know\ how\ to\ build\ task\ %.%#,%+Einvalid\ option:%.%#,%+Irake\ %\\S%\\+%\\s%\\+#\ %.%#,chdir\ /Users/rem/code/shapa/shapa-server
+setlocal expandtab
+if &filetype != 'eruby'
+setlocal filetype=eruby
+endif
+setlocal fixendofline
+setlocal foldcolumn=0
+setlocal foldenable
+setlocal foldexpr=0
+setlocal foldignore=#
+setlocal foldlevel=0
+setlocal foldmarker={{{,}}}
+setlocal foldmethod=manual
+setlocal foldminlines=1
+setlocal foldnestmax=20
+setlocal foldtext=foldtext()
+setlocal formatexpr=
+setlocal formatoptions=croql
+setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
+setlocal formatprg=
+setlocal grepprg=
+setlocal iminsert=0
+setlocal imsearch=-1
+setlocal include=^\\s*\\<\\(load\\>\\|require\\>\\|autoload\\s*:\\=[\"']\\=\\h\\w*[\"']\\=,\\)
+setlocal includeexpr=rails#includeexpr(v:fname)
+setlocal indentexpr=GetErubyIndent()
+setlocal indentkeys=o,O,*<Return>,<>>,{,},0),0],o,O,!^F,=end,=else,=elsif,=rescue,=ensure,=when
+setlocal noinfercase
+setlocal iskeyword=@,48-57,_,192-255
+setlocal keywordprg=ri
+setlocal linebreak
+setlocal nolisp
+setlocal lispwords=
+setlocal nolist
+setlocal makeencoding=
+setlocal makeprg=bin/rake
+setlocal matchpairs=(:),{:},[:],<:>
+setlocal modeline
+setlocal modifiable
+setlocal nrformats=bin,octal,hex
+setlocal number
+setlocal numberwidth=4
+setlocal omnifunc=rubycomplete#Complete
+setlocal path=.,~/code/shapa/shapa-server/lib,~/code/shapa/shapa-server/vendor,~/code/shapa/shapa-server/app/models/concerns,~/code/shapa/shapa-server/app/controllers/concerns,~/code/shapa/shapa-server/app/controllers,~/code/shapa/shapa-server/app/helpers,~/code/shapa/shapa-server/app/mailers,~/code/shapa/shapa-server/app/models,~/code/shapa/shapa-server/app/jobs,~/code/shapa/shapa-server/app/*,~/code/shapa/shapa-server/test,~/code/shapa/shapa-server/test/unit,~/code/shapa/shapa-server/test/functional,~/code/shapa/shapa-server/test/integration,~/code/shapa/shapa-server/test/controllers,~/code/shapa/shapa-server/test/helpers,~/code/shapa/shapa-server/test/mailers,~/code/shapa/shapa-server/test/models,~/code/shapa/shapa-server/test/jobs,~/code/shapa/shapa-server/spec,~/code/shapa/shapa-server/spec/controllers,~/code/shapa/shapa-server/spec/helpers,~/code/shapa/shapa-server/spec/mailers,~/code/shapa/shapa-server/spec/models,~/code/shapa/shapa-server/spec/views,~/code/shapa/shapa-server/spec/lib,~/code/shapa/shapa-server/spec
+setlocal nopreserveindent
+setlocal nopreviewwindow
+setlocal quoteescape=\\
+setlocal noreadonly
+setlocal relativenumber
+setlocal norightleft
+setlocal rightleftcmd=search
+setlocal noscrollbind
+setlocal shiftwidth=2
+setlocal noshortname
+setlocal signcolumn=auto
+setlocal nosmartindent
+setlocal softtabstop=2
+setlocal nospell
+setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
+setlocal spellfile=
+setlocal spelllang=en
+setlocal statusline=
+setlocal suffixesadd=.rb
+setlocal noswapfile
+setlocal synmaxcol=3000
+if &syntax != 'eruby'
+setlocal syntax=eruby
+endif
+setlocal tabstop=2
+setlocal tagcase=
+setlocal tags=~/code/shapa/shapa-server/tags,~/code/shapa/shapa-server/tmp/tags,./tags;/,/usr/local/Cellar/rbenv/1.1.1/rbenv.d/exec/gem-rehash/tags,~/.rbenv/versions/2.3.1/lib/ruby/site_ruby/2.3.0/tags,~/.rbenv/versions/2.3.1/lib/ruby/site_ruby/2.3.0/x86_64-darwin17/tags,~/.rbenv/versions/2.3.1/lib/ruby/site_ruby/tags,~/.rbenv/versions/2.3.1/lib/ruby/vendor_ruby/2.3.0/tags,~/.rbenv/versions/2.3.1/lib/ruby/vendor_ruby/2.3.0/x86_64-darwin17/tags,~/.rbenv/versions/2.3.1/lib/ruby/vendor_ruby/tags,~/.rbenv/versions/2.3.1/lib/ruby/2.3.0/tags,~/.rbenv/versions/2.3.1/lib/ruby/2.3.0/x86_64-darwin17/tags
+setlocal termkey=
+setlocal termsize=
+setlocal textwidth=0
+setlocal thesaurus=
+setlocal noundofile
+setlocal undolevels=-123456
+setlocal nowinfixheight
+setlocal nowinfixwidth
+setlocal wrap
+setlocal wrapmargin=0
+silent! normal! zE
+let s:l = 43 - ((28 * winheight(0) + 18) / 37)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+43
+normal! 077|
+lcd ~/code/shapa/shapa-server
+let &so = s:so_save | let &siso = s:siso_save
+doautoall SessionLoadPost
+" vim: set ft=vim :

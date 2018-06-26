@@ -1,3 +1,0 @@
-setupController: function(controller, model) {
-  controller.set('$0', model);
-}

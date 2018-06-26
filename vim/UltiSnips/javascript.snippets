@@ -350,3 +350,29 @@ endsnippet
 snippet fmes "Formatted Message Component" A
 <FormattedMessage id=\"$1\" defaultMessage=\"$2\" />
 endsnippet
+
+snippet ract "Redux action" bA
+export const ${1:action} = payload => ({
+  type: ${2:type},
+  payload
+});$0
+endsnippet
+
+snippet raset "Redux actions set" bA
+import { ${1:NAME}_REQUEST, $1_SUCCESS, $1_FAILURE } from "../types";
+
+export const ${2:name}Request = payload => ({
+  type: $1_REQUEST,
+  payload
+});
+
+export const $2Success = payload => ({
+  type: $1_SUCCESS,
+  payload
+});
+
+export const $2Failure = payload => ({
+  type: $1_FAILURE,
+  payload
+});
+endsnippet

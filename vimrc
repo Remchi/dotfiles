@@ -28,11 +28,14 @@ Plugin 'Lokaltog/vim-easymotion'
 Plugin 'SirVer/ultisnips'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'gorkunov/smartpairs.vim'
-Plugin 'pangloss/vim-javascript'
+" Plugin 'pangloss/vim-javascript'
+Plugin 'othree/yajs.vim'
+Plugin 'othree/javascript-libraries-syntax.vim'
 Plugin 'digitaltoad/vim-pug'
-Plugin 'ctrlpvim/ctrlp.vim'
+" Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'mxw/vim-jsx', { 'for': ['jsx','javascript.jsx']}
+" Plugin 'chemzqm/vim-jsx-improve'
 Plugin 'tpope/vim-commentary' " or Plugin 'tomtom/tcomment_vim'
 Plugin 'ervandew/supertab'
 Plugin 'othree/html5.vim'
@@ -60,6 +63,11 @@ Plugin 'tpope/vim-obsession'
 Plugin 'xtal8/traces.vim'
 Plugin 'lyokha/vim-xkbswitch'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'ajh17/Spacegray.vim'
+Plugin 'posva/vim-vue'
+Plugin 'AndrewRadev/whitespaste.vim'
+Plugin 'raphamorim/lucario'
+Plugin 'soywod/kronos.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -93,7 +101,7 @@ set shiftwidth=2
 set softtabstop=2
 set expandtab
 set regexpengine=1
-set relativenumber
+" set relativenumber
 set number
 set wrap
 set linebreak
@@ -136,12 +144,13 @@ if has("autocmd")
 
     autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
     autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
-    autocmd BufWinLeave *.* mkview
-    autocmd BufWinEnter *.* silent loadview
+    " autocmd BufWinLeave *.* mkview
+    " autocmd BufWinEnter *.* silent loadview
 
     au BufNewFile,BufReadPost *.md set filetype=markdown
 
     autocmd FileType javascript set formatprg=prettier\ --stdin
+    "autocmd BufLeave,FocusLost * silent! wall
   augroup END
 endif
 
@@ -247,7 +256,7 @@ set wildignore+=**/bower_components/*,**/node_modules/*,**/tmp/*,**/assets/image
 " JSX
 let g:jsx_ext_required = 0
 let g:javascript_enable_domhtmlcss = 1
-let g:used_javascript_libs = 'underscore,react,chai'
+let g:used_javascript_libs = 'underscore,react'
 
 " Emmet
 let g:user_emmet_settings={'javascript.jsx': {'extends':'jsx'}}
@@ -275,12 +284,13 @@ autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.gra
 
 " Ale
 let g:ale_set_highlights = 0
-nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-nmap <silent> <C-j> <Plug>(ale_next_wrap)
+nmap <silent> <Leader>au <Plug>(ale_previous_wrap)
+nmap <silent> <Leader>ae <Plug>(ale_next_wrap)
 let g:ale_linters = {
 \   'javascript': ['eslint'],
 \   'ruby': [],
 \}
+
 
 " =============================================================
 "                      APPEARENCE
@@ -333,3 +343,5 @@ let @n = 'yGoi```jsP:wGzz'
 nnoremap <leader>c mmggVGy`m
 nnoremap <leader>x ggVGd
 
+let @n = 'yGo```jskpG'
+let @e = 'yGo```jskpGzz'
