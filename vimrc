@@ -9,13 +9,10 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
-Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-eunuch'
-Plugin 'tpope/vim-ragtag'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-abolish'
 Plugin 'vim-ruby/vim-ruby'
@@ -28,46 +25,31 @@ Plugin 'Lokaltog/vim-easymotion'
 Plugin 'SirVer/ultisnips'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'gorkunov/smartpairs.vim'
+Plugin 'djoshea/vim-autoread'
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
+Plugin 'posva/vim-vue'
+Plugin 'matze/vim-move'
+
 " Plugin 'pangloss/vim-javascript'
-Plugin 'othree/yajs.vim'
-Plugin 'othree/javascript-libraries-syntax.vim'
-Plugin 'digitaltoad/vim-pug'
-" Plugin 'ctrlpvim/ctrlp.vim'
+" Plugin 'othree/yajs.vim'
+" Plugin 'othree/es.next.syntax.vim'
+" Plugin 'othree/javascript-libraries-syntax.vim'
+" Plugin 'isRuslan/vim-es6'
+
 Plugin 'scrooloose/nerdtree'
 Plugin 'mxw/vim-jsx', { 'for': ['jsx','javascript.jsx']}
-" Plugin 'chemzqm/vim-jsx-improve'
 Plugin 'tpope/vim-commentary' " or Plugin 'tomtom/tcomment_vim'
 Plugin 'ervandew/supertab'
 Plugin 'othree/html5.vim'
 
 " Colour Themes
 Plugin 'GertjanReynaert/cobalt2-vim-theme'
-Plugin 'morhetz/gruvbox'
-Plugin 'romainl/flattened'
-
-" Writing
-Plugin 'reedes/vim-pencil'
-Plugin 'junegunn/limelight.vim'
-Plugin 'junegunn/goyo.vim'
-Plugin 'reedes/vim-colors-pencil'
+Plugin 'altercation/vim-colors-solarized'
 
 " Test Run
-Plugin 'djoshea/vim-autoread'
-Plugin 'junegunn/fzf' " vs CtrlP
-Plugin 'junegunn/fzf.vim'
-Plugin 'matze/vim-move'
-Plugin 'AndrewRadev/splitjoin.vim'
-Plugin 'kana/vim-textobj-user'
-Plugin 'nelstrom/vim-textobj-rubyblock'
 Plugin 'tpope/vim-obsession'
-Plugin 'xtal8/traces.vim'
 Plugin 'lyokha/vim-xkbswitch'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'ajh17/Spacegray.vim'
-Plugin 'posva/vim-vue'
-Plugin 'AndrewRadev/whitespaste.vim'
-Plugin 'raphamorim/lucario'
-Plugin 'soywod/kronos.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -101,8 +83,8 @@ set shiftwidth=2
 set softtabstop=2
 set expandtab
 set regexpengine=1
-" set relativenumber
-set number
+set relativenumber
+" set number
 set wrap
 set linebreak
 set hlsearch
@@ -126,6 +108,7 @@ set ttimeoutlen=1
 set listchars=tab:>-,trail:~,extends:>,precedes:<,space:.
 set ttyfast
 set lazyredraw
+set re=1
 
 set path+=**
 set tags=./tags;/
@@ -161,7 +144,10 @@ endif
 let mapleader = ","
 
 " insert mode
-inoremap <c-e> <esc>A
+inoremap <c-e> <down>
+inoremap <c-n> <left>
+inoremap <c-y> <up>
+inoremap <c-i> <right>
 
 " Quick open most used files
 nnoremap <leader>em :!open -a 'Marked 2.app' '%:p'<cr>
@@ -182,18 +168,11 @@ nnoremap <leader>V V`]
 nnoremap <leader>I V`]=
 nmap k gk
 nmap j gj
-nnoremap H ^
-nnoremap E $
 
 noremap <Leader>d :Bclose<CR>
 noremap <Leader>D :bufdo bd<CR>
 
 cnoremap %% <C-R>=expand("%:p:h") . "/" <CR>
-
-" CtrlP plugin
-" nnoremap <leader>f :CtrlP<cr>
-" nnoremap <leader>. :CtrlPBuffer<cr>
-" nnoremap <leader>p :CtrlPClearCache<cr>
 
 " FZF
 nnoremap <leader>f :GFiles<cr>
@@ -201,7 +180,7 @@ nnoremap <leader>F :Files<cr>
 nnoremap <leader>. :Buffers<cr>
 
 " Fugitive
-nnoremap <leader>z :Gstatus<CR>:only<CR>
+nnoremap <leader>g :Gstatus<CR>:only<CR>
 
 " Tabs
 nnoremap <leader>1 1gt<cr>
@@ -237,21 +216,11 @@ vmap s <Plug>(easymotion-bd-t)
 " Vim Move
 let g:move_key_modifier = 'C'
 
-" Pencil
-let g:pencil_neutral_code_bg = 1
-let g:pencil_terminal_italics = 1
-
-" Airline
-" let g:airline#extensions#tabline#enabled = 0
-" let g:airline_powerline_fonts = 1
-" let g:airline_theme='papercolor'
+" Vue
+" let g:vue_disable_pre_processors=1
 
 " Markdown
 let g:markdown_fenced_languages = ['css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml']
-
-" CtrlP
-let g:ctrlp_working_path_mode='a'
-set wildignore+=**/bower_components/*,**/node_modules/*,**/tmp/*,**/assets/images/*,**/assets/fonts/*,**/public/images/*
 
 " JSX
 let g:jsx_ext_required = 0
@@ -260,6 +229,7 @@ let g:used_javascript_libs = 'underscore,react'
 
 " Emmet
 let g:user_emmet_settings={'javascript.jsx': {'extends':'jsx'}}
+let g:user_emmet_leader_key='<C-t>'
 
 " Layout switcher
 let g:XkbSwitchLib = '/usr/local/lib/libInputSourceSwitcher.dylib'
@@ -280,7 +250,7 @@ let g:prettier#config#parser = 'flow'
 let g:prettier#config#config_precedence = 'prefer-file'
 let g:prettier#config#prose_wrap = 'preserve'
 let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md PrettierAsync
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
 
 " Ale
 let g:ale_set_highlights = 0
@@ -337,11 +307,3 @@ function! <SID>StripTrailingWhitespaces()
     call cursor(l, c)
 endfun
 
-nnoremap <leader>en :Files ~/Dropbox/MarkdownContent<CR>
-let @e = 'yGop:w'
-let @n = 'yGoi```jsP:wGzz'
-nnoremap <leader>c mmggVGy`m
-nnoremap <leader>x ggVGd
-
-let @n = 'yGo```jskpG'
-let @e = 'yGo```jskpGzz'

@@ -52,3 +52,5 @@
 	smudge = git-lfs smudge -- %f
 	required = true
 	process = git-lfs filter-process
+[gui]
+	recentrepo = /Users/rem/code/jsfullstacker-vue/jsfullstacker-api
