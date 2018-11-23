@@ -46,10 +46,12 @@ Plugin 'othree/html5.vim'
 " Colour Themes
 Plugin 'GertjanReynaert/cobalt2-vim-theme'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'kaicataldo/material.vim'
 
 " Test Run
 Plugin 'tpope/vim-obsession'
-Plugin 'lyokha/vim-xkbswitch'
+Plugin 'lyokha/vim-xkbswitch' " Input Source Switcher
+Plugin 'firegoby/html_entities_helper.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -276,9 +278,25 @@ colorscheme cobalt2
 set background=dark
 
 if has("gui_running")
-  set guifont=Operator\ Mono:h14
-  set linespace=2
+  " set guifont=Operator\ Mono:h14
+  set guifont=Input\ Mono:h14
+  set linespace=4
   set guioptions-=r
+  colorscheme material
+  let g:material_theme_style = 'default' " 'palenight' | 'dark'
+  let g:material_terminal_italics = 1
+endif
+
+if (has("nvim"))
+  "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+endif
+
+"For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+"Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+" < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+if (has("termguicolors"))
+  set termguicolors
 endif
 
 " =============================================================
@@ -307,3 +325,9 @@ function! <SID>StripTrailingWhitespaces()
     call cursor(l, c)
 endfun
 
+" EPUB macros
+let @a = '0vf/f>c<p>A€kb€kb€kb€kb€kbp>j'
+let @b = 'gg/<p>f>a<span class="dropcap">la</span> '
+let @c = ':%s/&#151;/€PSâ€”[201~/g'
+let @f = '/fnres€kbf F<vf/;;f>c<a href="./endnotes.xhtml#note-1" id="note-€kbref-1" epub:type="noteref" style="vertical-align: supre€kb€kber;">1</a>F1F1F1'
+let @n = 'O<li id="note-1" epub:type="rearnote"><p>dd==0^0f(i<i>f)€kb€kbf)a</i>o€kbo<a href="./ch-2.xhtml#noteref-1" eput:€kb€kbb:type="se:referrer">€PSâ†©[201~<a€kb/a>€kb</p>€kb</li>j'
