@@ -31,7 +31,7 @@ Plugin 'junegunn/fzf.vim'
 Plugin 'posva/vim-vue'
 Plugin 'matze/vim-move'
 
-" Plugin 'pangloss/vim-javascript'
+Plugin 'pangloss/vim-javascript'
 " Plugin 'othree/yajs.vim'
 " Plugin 'othree/es.next.syntax.vim'
 " Plugin 'othree/javascript-libraries-syntax.vim'
@@ -52,6 +52,7 @@ Plugin 'kaicataldo/material.vim'
 Plugin 'tpope/vim-obsession'
 Plugin 'lyokha/vim-xkbswitch' " Input Source Switcher
 Plugin 'firegoby/html_entities_helper.vim'
+Plugin 'dustinknopoff/TeaCode-Vim-Extension'
 
 call vundle#end()
 filetype plugin indent on
@@ -209,11 +210,15 @@ vnoremap Y myY`y
 nnoremap <leader>q :NERDTreeToggle<cr>
 let NERDTreeMinimalUI=1
 let NERDTreeShowLineNumbers=1
+let NERDTreeQuitOnOpen=1
 
 " Easymotion
 nmap s <Plug>(easymotion-s)
 omap s <Plug>(easymotion-bd-t)
 vmap s <Plug>(easymotion-bd-t)
+
+" Teacode
+inoremap <C-e> <C-O>:call TeaCodeExpand()<CR>
 
 " Vim Move
 let g:move_key_modifier = 'C'
@@ -274,11 +279,11 @@ let &t_AB="\e[48;5;%dm"
 let &t_AF="\e[38;5;%dm"
 
 " colorscheme cobalt2
-colorscheme cobalt2
+colorscheme material
 set background=dark
 
 if has("gui_running")
-  " set guifont=Operator\ Mono:h14
+  "set guifont=Operator\ Mono:h14
   set guifont=Input\ Mono:h14
   set linespace=4
   set guioptions-=r
@@ -326,8 +331,11 @@ function! <SID>StripTrailingWhitespaces()
 endfun
 
 " EPUB macros
-let @a = '0vf/f>c<p>A€kb€kb€kb€kb€kbp>j'
-let @b = 'gg/<p>f>a<span class="dropcap">la</span> '
-let @c = ':%s/&#151;/€PSâ€”[201~/g'
-let @f = '/fnres€kbf F<vf/;;f>c<a href="./endnotes.xhtml#note-1" id="note-€kbref-1" epub:type="noteref" style="vertical-align: supre€kb€kber;">1</a>F1F1F1'
-let @n = 'O<li id="note-1" epub:type="rearnote"><p>dd==0^0f(i<i>f)€kb€kbf)a</i>o€kbo<a href="./ch-2.xhtml#noteref-1" eput:€kb€kbb:type="se:referrer">€PSâ†©[201~<a€kb/a>€kb</p>€kb</li>j'
+" let @a = '0vf/f>c<p>A€kb€kb€kb€kb€kbp>j'
+" let @b = 'gg/<p>f>a<span class="dropcap">la</span> '
+" let @c = ':%s/&#151;/€PSâ€”[201~/g'
+" let @f = '/fnres€kbf F<vf/;;f>c<a href="./endnotes.xhtml#note-1" id="note-€kbref-1" epub:type="noteref" style="vertical-align: supre€kb€kber;">1</a>F1F1F1'
+" let @n = 'O<li id="note-1" epub:type="rearnote"><p>dd==0^0f(i<i>f)€kb€kbf)a</i>o€kbo<a href="./ch-2.xhtml#noteref-1" eput:€kb€kbb:type="se:referrer">€PSâ†©[201~<a€kb/a>€kb</p>€kb</li>j'
+let @j = 'yGoo```jsPG'
+let @h = 'yGoo```htmlPG'
+let @t = 'yGoo```PG'

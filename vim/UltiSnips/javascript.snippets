@@ -1,12 +1,12 @@
 snippet ccom "Class React Component" bA
 import React from 'react';
 
-class ${1:`!p snip.rv = re.sub('\.js$', '', fn)`} extends React.Component {
+class ${1:`!p snip.rv = snip.basename`} extends React.Component {
 	render() {
 		return (
-			<${2:div}>
+			<div>
 				$0
-			</$2>
+			</div>
 		);
 	}
 }
@@ -17,33 +17,33 @@ endsnippet
 snippet fcom "Functional Component" bA
 import React from 'react';
 
-const ${1:`!p snip.rv = re.sub('\.js$', '', fn)`} = (${2:props}) => (
-		<${3:div}>
-			$0
-		</$3>
+const ${1:`!p snip.rv = snip.basename`} = () => (
+	<div>
+		$0
+	</div>
 )
 
 export default $1;
 endsnippet
 
-snippet reim "React import" bA
+snippet nimp "Import" bA
+import $1 from '$0$1';
+endsnippet
+snippet impr "React import" bA
 import React from 'react';$0
 endsnippet
-
-snippet nimp "Import" bA
-import $1 from '$2';$0
+snippet impl "Lodash import" bA
+import _ from 'lodash';$0
 endsnippet
-
-snippet ipt "Import prop types" bA
+snippet impp "Import prop types" bA
 import PropTypes from 'prop-types';$0
 endsnippet
-
-snippet icon "Import Connect" bA
+snippet impc "Import Connect" bA
 import { connect } from 'react-redux';$0
 endsnippet
 
 snippet rred "Reducer definition" bA
-export default function ${1:`!p snip.rv = re.sub('\.js$', '', fn)`}(state = {}, action = {}) {
+export default function ${1:`!p snip.rv = snip.basename`}(state = {}, action = {}) {
 	switch(action.type) {
 		default: return state;
 	}
@@ -60,8 +60,8 @@ componentDidMount() {
 }
 endsnippet
 
-snippet rconst "Redux Action Type Constant" bA
-export const ${1:CONSTANT_NAME} = '$1';$0
+snippet "rconst (.*)" "Redux Action Type Constant" br
+export const `!p snip.rv = match.group(1).upper().replace(' ', '_')` = "`!p snip.rv = match.group(1).upper().replace(' ', '_')`";$0
 endsnippet
 
 snippet pts "React Prop Types String" A
@@ -89,13 +89,13 @@ PropTypes.arrayOf(PropTypes.object).isRequired
 endsnippet
 
 snippet ptdef "React Prop Types Define" bA
-${1:`!p snip.rv = re.sub('\.js$', '', fn)`}.propTypes = {
+${1:`!p snip.rv = snip.basename`}.propTypes = {
 	$0
 }
 endsnippet
 
 snippet pttdef "React Prop Types Default" bA
-${1:`!p snip.rv = re.sub('\.js$', '', fn)`}.defaultProps = {
+${1:`!p snip.rv = snip.basename`}.defaultProps = {
 	$0
 }
 endsnippet
@@ -111,8 +111,8 @@ $0
 export default router;
 endsnippet
 
-snippet eend "Express Endpoint" bA
-router.${1:get}('${2:/}', (req, res) => {
+snippet ereq "Express Endpoint" bA
+router.${1:get}('${2:/}', async (req, res) => {
 	$0
 });
 endsnippet

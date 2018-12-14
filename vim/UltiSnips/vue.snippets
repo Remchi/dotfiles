@@ -1,10 +1,104 @@
 snippet vcom "Vue Component file" bA
 <template>
+	<div>
+		$0
+	</div>
 </template>
 
 <script>
 export default {
-  name: "${1:`!p snip.rv = re.sub('\.vue$', '', fn)`}"
+	name: "${1:`!p snip.rv = snip.basename`}"
 };
 </script>
+endsnippet
+
+snippet vbform "Vue Boostrap Form" bA
+<template>
+  <div>
+    <b-form @submit.prevent="submit">
+
+      <form-button :loading="loading" type="primary">
+        Submit
+      </form-button>
+
+    </b-form>
+  </div>
+</template>
+
+<script>
+export default {
+	name: "${1:`!p snip.rv = snip.basename`}",
+
+  data() {
+    return {
+      data: {$0},
+      loading: false,
+      errors: {}
+    };
+  },
+
+  methods: {
+    async submit() {
+      if (!this.validate()) return;
+    },
+
+    validate() {
+      const errors = {};
+
+      this.errors = errors;
+      return Object.keys(errors).length === 0;
+    }
+  },
+
+  mounted() {
+    // this.$refs.identifier.focus();
+  }
+};
+</script>
+endsnippet
+
+snippet vbgroup "Vue Bootstrap Form Group" bA
+<b-form-group
+  label="`!p snip.rv = re.sub('(?!^)([A-Z][a-z]+)', r' \1', t[1]).title()`"
+  :state="!errors.$1"
+  :invalid-feedback="errors.$1"
+>
+  <b-form-input
+    v-model="data.$1"
+    :disabled="loading"
+  />
+</b-form-group>
+endsnippet
+
+snippet vbsub "Vue Form Submit" bA
+try {
+  this.loading = true;
+  await this.create${1:action}(this.data);
+  this.loading = false;
+  this.$emit('success');
+} catch (err) {
+  this.loading = false;
+  this.errors = err.response.data.errors;
+}
+endsnippet
+
+snippet vdata "Vue data method" bA
+data() {
+  return {
+		$0
+  }
+}
+endsnippet
+
+snippet nimp "Import" bA
+import $1 from '$0$1';
+endsnippet
+snippet impl "Import lodash" bA
+import _ from 'lodash';
+endsnippet
+snippet impma "Import mapActions" bA
+import { mapActions } from 'vuex';
+endsnippet
+snippet impmg "Import mapGetters" bA
+import { mapGetters } from 'vuex';
 endsnippet
