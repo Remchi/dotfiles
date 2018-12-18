@@ -284,7 +284,7 @@ set background=dark
 
 if has("gui_running")
   "set guifont=Operator\ Mono:h14
-  set guifont=Input\ Mono:h14
+  set guifont="Input Mono:h10"
   set linespace=4
   set guioptions-=r
   colorscheme material
