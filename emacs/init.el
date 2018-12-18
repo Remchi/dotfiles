@@ -5,6 +5,12 @@
 
 ;; PACKAGES
 
+;; SWITCH KEYS FOR C-X
+(keyboard-translate ?\C-n ?\C-x)
+(keyboard-translate ?\C-x ?\C-n)
+(keyboard-translate ?\C-i ?\C-c)
+(keyboard-translate ?\C-c ?\C-i)
+
 ;; BASIC SETTINGS
 (setq backup-directory-alist `(("." . "~/.saves")))
 (setq auto-save-default nil)
