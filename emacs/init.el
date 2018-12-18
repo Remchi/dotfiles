@@ -107,6 +107,10 @@
 (global-set-key (kbd "C-M-o") 'er/mark-inner-tag)
 (global-set-key (kbd "C-M-O") 'er/mark-outer-tag)
 
+;; Swap command with alt
+(setq mac-command-modifier 'meta)
+(setq mac-option-modifier 'super)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
