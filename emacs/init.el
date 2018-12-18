@@ -11,6 +11,12 @@
 (keyboard-translate ?\C-i ?\C-c)
 (keyboard-translate ?\C-c ?\C-i)
 
+;; Cursor keys on home row
+(global-set-key (kbd "M-e") 'next-line)
+(global-set-key (kbd "M-u") 'previous-line)
+(global-set-key (kbd "M-n") 'backward-char)
+(global-set-key (kbd "M-i") 'forward-char)
+
 ;; BASIC SETTINGS
 (setq backup-directory-alist `(("." . "~/.saves")))
 (setq auto-save-default nil)
@@ -37,6 +43,7 @@
 (delete-selection-mode t)
 (blink-cursor-mode t)
 (show-paren-mode t)
+(setq ring-bell-function 'ignore)
 
 ;; SAVEPLACE
 (save-place-mode 1)
@@ -61,7 +68,7 @@
 (setq ivy-use-virtual-buffers t)
 (setq enable-recursive-minibuffers t)
 ;;(global-set-key (kbd "C-x C-f") 'counsel-find-file)
-(global-set-key "\C-s" 'swiper)
+;;(global-set-key "\C-s" 'swiper)
 (setq projectile-completion-system 'ivy)
 (setq ivy-re-builders-alist
       '((swiper . ivy--regex-plus)
@@ -104,13 +111,17 @@
 ;; EXPAND REGION
 (require 'expand-region)
 (global-set-key (kbd "C-o") 'er/expand-region)
-(global-set-key (kbd "C-O") 'er/mark-html-attribute)
-(global-set-key (kbd "C-M-o") 'er/mark-inner-tag)
-(global-set-key (kbd "C-M-O") 'er/mark-outer-tag)
+;;(global-set-key (kbd "C-O") 'er/mark-html-attribute)
+;;(global-set-key (kbd "C-M-o") 'er/mark-inner-tag)
+;;(global-set-key (kbd "C-M-O") 'er/mark-outer-tag)
 
 ;; Swap command with alt
 (setq mac-command-modifier 'meta)
 (setq mac-option-modifier 'super)
+
+;; YASNIPPETS
+(setq yas-snippet-dirs '("~/.emacs.d/snippets"))
+(yas-global-mode 1)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -136,7 +147,7 @@
       ""))))
  '(package-selected-packages
    (quote
-    (markdown-mode expand-region ivy projectile all-the-icons neotree vue-mode js2-mode helm popup avy dracula-theme))))
+    (yasnippet markdown-mode expand-region ivy projectile all-the-icons neotree vue-mode js2-mode helm popup avy dracula-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
