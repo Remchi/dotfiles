@@ -26,7 +26,7 @@
       scroll-preserve-screen-position 1)
 (when (window-system)
   (tooltip-mode -1)
-  (menu-bar-mode -1)
+  ;;(menu-bar-mode -1)
   (set-fringe-style -1)
   (scroll-bar-mode -1)
   (tool-bar-mode -1))
@@ -49,6 +49,7 @@
 (setq org-startup-indented t)
 (global-set-key (kbd "C-c c") 'org-capture)
 (setq org-src-tab-acts-natively t)
+(setq org-agenda-files '("~/Dropbox/Org/notes.org"))
 
 
 ;; HELM
