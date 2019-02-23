@@ -1,5 +1,9 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =3
-let g:netrw_dirhist_1='/Users/remchi/code/repgain_frontend'
-let g:netrw_dirhist_2='/Users/remchi/code/repgain_frontend/app'
-let g:netrw_dirhist_3='/Users/remchi/code/repgain_frontend'
+let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_1='/Users/rem/jsf-code/bgtracker-series/bgtracker-vue'
+let g:netrw_dirhist_2='/Users/rem'
+let g:netrw_dirhist_3='/Users'
+let g:netrw_dirhist_4='/'
+let g:netrw_dirhist_5='/Users/rem'
+let g:netrw_dirhist_6='/Users'
+let g:netrw_dirhist_7='/Users/rem'

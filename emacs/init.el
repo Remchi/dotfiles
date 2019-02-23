@@ -6,16 +6,24 @@
 ;; PACKAGES
 
 ;; SWITCH KEYS FOR C-X
-(keyboard-translate ?\C-n ?\C-x)
-(keyboard-translate ?\C-x ?\C-n)
-(keyboard-translate ?\C-i ?\C-c)
-(keyboard-translate ?\C-c ?\C-i)
+;;(keyboard-translate ?\C-n ?\C-x)
+;;(keyboard-translate ?\C-x ?\C-n)
+;;(keyboard-translate ?\C-i ?\C-c)
+;;(keyboard-translate ?\C-c ?\C-i)
 
-;; Cursor keys on home row
-(global-set-key (kbd "M-e") 'next-line)
-(global-set-key (kbd "M-u") 'previous-line)
-(global-set-key (kbd "M-n") 'backward-char)
-(global-set-key (kbd "M-i") 'forward-char)
+;; MAP KEYS IN RUSSIAN LAYOUT
+(global-set-key (kbd "C-о") 'next-line)
+(global-set-key (kbd "C-к") 'previous-line)
+(global-set-key (kbd "C-и") 'backward-char)
+(global-set-key (kbd "C-у") 'forward-char)
+(global-set-key (kbd "C-л") 'end-of-visual-line)
+(global-set-key (kbd "C-ф") 'beginning-of-visual-line)
+
+;; cursor keys on home row
+;;(global-set-key (kbd "M-e") 'next-line)
+;;(global-set-key (kbd "M-u") 'previous-line)
+;;(global-set-key (kbd "M-n") 'backward-char)
+;;(global-set-key (kbd "M-i") 'forward-char)
 
 ;; BASIC SETTINGS
 (setq backup-directory-alist `(("." . "~/.saves")))
@@ -147,7 +155,7 @@
       ""))))
  '(package-selected-packages
    (quote
-    (yasnippet markdown-mode expand-region ivy projectile all-the-icons neotree vue-mode js2-mode helm popup avy dracula-theme))))
+    (evil yasnippet markdown-mode expand-region ivy projectile all-the-icons neotree vue-mode js2-mode helm popup avy dracula-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

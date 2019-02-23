@@ -16,12 +16,12 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-abolish'
 Plugin 'vim-ruby/vim-ruby'
-Plugin 'mattn/emmet-vim', { 'for': ['javascript.jsx', 'html', 'css'] }
-Plugin 'prettier/vim-prettier'
+" Plugin 'mattn/emmet-vim', { 'for': ['javascript.jsx', 'html', 'css'] }
+Plugin 'prettier/vim-prettier', { 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 Plugin 'w0rp/ale'
 Plugin 'rbgrouleff/bclose.vim'
 Plugin 'cohama/lexima.vim'
-Plugin 'Lokaltog/vim-easymotion'
+Plugin 'easymotion/vim-easymotion'
 Plugin 'SirVer/ultisnips'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'gorkunov/smartpairs.vim'
@@ -40,19 +40,24 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'scrooloose/nerdtree'
 Plugin 'mxw/vim-jsx', { 'for': ['jsx','javascript.jsx']}
 Plugin 'tpope/vim-commentary' " or Plugin 'tomtom/tcomment_vim'
-Plugin 'ervandew/supertab'
+"Plugin 'ervandew/supertab'
 Plugin 'othree/html5.vim'
 
 " Colour Themes
 Plugin 'GertjanReynaert/cobalt2-vim-theme'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'kaicataldo/material.vim'
+Plugin 'dracula/vim'
 
 " Test Run
 Plugin 'tpope/vim-obsession'
 Plugin 'lyokha/vim-xkbswitch' " Input Source Switcher
 Plugin 'firegoby/html_entities_helper.vim'
 Plugin 'dustinknopoff/TeaCode-Vim-Extension'
+Plugin 'tpope/vim-vinegar'
+Plugin 'itchyny/lightline.vim'
+Plugin 'alvan/vim-closetag'
+" Plugin 'ryanoasis/vim-devicons'
 
 call vundle#end()
 filetype plugin indent on
@@ -86,8 +91,8 @@ set shiftwidth=2
 set softtabstop=2
 set expandtab
 set regexpengine=1
-set relativenumber
-" set number
+" set relativenumber
+set number
 set wrap
 set linebreak
 set hlsearch
@@ -110,11 +115,14 @@ set ttimeout
 set ttimeoutlen=1
 set listchars=tab:>-,trail:~,extends:>,precedes:<,space:.
 set ttyfast
-set lazyredraw
-set re=1
+" set lazyredraw
+" set re=1
 
 set path+=**
 set tags=./tags;/
+set encoding=UTF-8
+"set foldmethod=indent
+set signcolumn=yes
 " =============================================================
 "                    AUTOCOMMANDS
 " =============================================================
@@ -130,13 +138,17 @@ if has("autocmd")
 
     autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
     autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+    autocmd BufRead * normal zR
     " autocmd BufWinLeave *.* mkview
-    " autocmd BufWinEnter *.* silent loadview
 
+    " autocmd BufWinEnter *.* silent loadview
     au BufNewFile,BufReadPost *.md set filetype=markdown
+    au BufNewFile,BufReadPost *.vue syntax sync fromstart
 
     autocmd FileType javascript set formatprg=prettier\ --stdin
     "autocmd BufLeave,FocusLost * silent! wall
+    autocmd filetype crontab setlocal nobackup nowritebackup
+
   augroup END
 endif
 
@@ -147,10 +159,10 @@ endif
 let mapleader = ","
 
 " insert mode
-inoremap <c-e> <down>
-inoremap <c-n> <left>
-inoremap <c-y> <up>
-inoremap <c-i> <right>
+"inoremap <c-e> <down>
+"inoremap <c-n> <left>
+"inoremap <c-y> <up>
+"inoremap <c-i> <right>
 
 " Quick open most used files
 nnoremap <leader>em :!open -a 'Marked 2.app' '%:p'<cr>
@@ -169,6 +181,8 @@ nnoremap <leader>w mzyyp`zj
 nnoremap <leader>v :set invpaste paste?<CR>
 nnoremap <leader>V V`]
 nnoremap <leader>I V`]=
+nnoremap <leader>a ggVG
+nnoremap <leader>r :syntax sync fromstart<CR>
 nmap k gk
 nmap j gj
 
@@ -179,11 +193,12 @@ cnoremap %% <C-R>=expand("%:p:h") . "/" <CR>
 
 " FZF
 nnoremap <leader>f :GFiles<cr>
-nnoremap <leader>F :Files<cr>
+nnoremap <leader>t :Files<cr>
 nnoremap <leader>. :Buffers<cr>
 
 " Fugitive
-nnoremap <leader>g :Gstatus<CR>:only<CR>
+nnoremap <leader>gg :Gstatus<CR>:only<CR>
+nnoremap <leader>gw :Gwrite<CR>
 
 " Tabs
 nnoremap <leader>1 1gt<cr>
@@ -202,6 +217,8 @@ cnoremap $d <CR>:d<CR>``
 vnoremap y myy`y
 vnoremap Y myY`y
 
+nnoremap <leader>s :w<cr>
+
 " =============================================================
 "                 PLUGINS CONFIGURATION
 " =============================================================
@@ -211,14 +228,23 @@ nnoremap <leader>q :NERDTreeToggle<cr>
 let NERDTreeMinimalUI=1
 let NERDTreeShowLineNumbers=1
 let NERDTreeQuitOnOpen=1
+let NERDTreeHijackNetrw = 0
+
+" Lightline
+let g:lightline = {
+      \ 'colorscheme': 'one',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'fugitive#head'
+      \ },
+      \ }
 
 " Easymotion
+nmap S <Plug>(easymotion-s2)
 nmap s <Plug>(easymotion-s)
-omap s <Plug>(easymotion-bd-t)
-vmap s <Plug>(easymotion-bd-t)
-
-" Teacode
-inoremap <C-e> <C-O>:call TeaCodeExpand()<CR>
 
 " Vim Move
 let g:move_key_modifier = 'C'
@@ -227,7 +253,7 @@ let g:move_key_modifier = 'C'
 " let g:vue_disable_pre_processors=1
 
 " Markdown
-let g:markdown_fenced_languages = ['css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml']
+let g:markdown_fenced_languages = ['css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml', 'html']
 
 " JSX
 let g:jsx_ext_required = 0
@@ -235,8 +261,11 @@ let g:javascript_enable_domhtmlcss = 1
 let g:used_javascript_libs = 'underscore,react'
 
 " Emmet
-let g:user_emmet_settings={'javascript.jsx': {'extends':'jsx'}}
-let g:user_emmet_leader_key='<C-t>'
+" let g:user_emmet_settings={'javascript.jsx': {'extends':'jsx'}}
+" let g:user_emmet_leader_key='<C-t>'
+
+" Tag Autoclose
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.vue'
 
 " Layout switcher
 let g:XkbSwitchLib = '/usr/local/lib/libInputSourceSwitcher.dylib'
@@ -253,7 +282,7 @@ let g:prettier#config#single_quote = 'false'
 let g:prettier#config#bracket_spacing = 'true'
 let g:prettier#config#jsx_bracket_same_line = 'false'
 let g:prettier#config#trailing_comma = 'none'
-let g:prettier#config#parser = 'flow'
+let g:prettier#config#parser = 'babylon'
 let g:prettier#config#config_precedence = 'prefer-file'
 let g:prettier#config#prose_wrap = 'preserve'
 let g:prettier#autoformat = 0
@@ -261,8 +290,8 @@ autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.gra
 
 " Ale
 let g:ale_set_highlights = 0
-nmap <silent> <Leader>au <Plug>(ale_previous_wrap)
-nmap <silent> <Leader>ae <Plug>(ale_next_wrap)
+nmap <silent> <Leader>nn <Plug>(ale_previous_wrap)
+nmap <silent> <Leader>np <Plug>(ale_next_wrap)
 let g:ale_linters = {
 \   'javascript': ['eslint'],
 \   'ruby': [],
@@ -283,9 +312,9 @@ colorscheme material
 set background=dark
 
 if has("gui_running")
-  "set guifont=Operator\ Mono:h14
-  set guifont="Input Mono:h10"
-  set linespace=4
+  "set guifont=Operator\ Mono:h18
+  set guifont=Input\ Mono:h18
+  set linespace=6
   set guioptions-=r
   colorscheme material
   let g:material_theme_style = 'default' " 'palenight' | 'dark'

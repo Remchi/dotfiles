@@ -14,6 +14,7 @@ class ${1:`!p snip.rv = snip.basename`} extends React.Component {
 export default $1;
 endsnippet
 
+
 snippet fcom "Functional Component" bA
 import React from 'react';
 
@@ -27,7 +28,7 @@ export default $1;
 endsnippet
 
 snippet nimp "Import" bA
-import $1 from '$0$1';
+import $1 from '$2';$0
 endsnippet
 snippet impr "React import" bA
 import React from 'react';$0
@@ -102,13 +103,13 @@ endsnippet
 
 
 snippet eroute "Express Route" bA
-import express from 'express';
+const express = require('express');
 
 let router = express.Router();
 
 $0
 
-export default router;
+module.exports = router;
 endsnippet
 
 snippet ereq "Express Endpoint" bA
@@ -172,185 +173,6 @@ onChangeString = e => {
 endsnippet
 
 
-snippet bfg "Bootstrap Form group" bA
-<div className="form-group">
-	<label htmlFor="${1:field}">${2:Label}</label>
-	<input
-		id="${1:field}"
-		name="${1:field}"
-		type="text"
-		className={
-			errors.${1:field} ? "form-control is-invalid" : "form-control"
-		}
-		onChange={this.onChangeString}
-		value={data.${1:field}}
-	/>
-	{errors.${1:field} && (
-		<small className="form-text invalid-feedback">
-			{errors.${1:field}}
-		</small>
-	)}
-</div>
-endsnippet
-
-snippet bform "Bootstrap Form" bA
-import React from "react";
-import PropTypes from "prop-types";
-import isEmail from "validator/lib/isEmail";
-import FormButton from "../common/FormButton";
-
-class ${1:`!p snip.rv = re.sub('\.js$', '', fn)`} extends React.Component {
-  state = {
-    data: {},
-    errors: {},
-    loading: false
-  };
-
-  validate = data => {
-    const errors = {};
-    return errors;
-  };
-
-  onChangeString = e => {
-    this.setState({
-      data: { ...this.state.data, [e.target.name]: e.target.value }
-    });
-  };
-
-  onSubmit = e => {
-    e.preventDefault();
-    const errors = this.validate(this.state.data);
-    this.setState({ errors });
-    if (Object.keys(errors).length === 0) {
-      this.setState({ loading: true });
-      this.props
-        .submit(this.state.data)
-        .catch(err =>
-          this.setState({ errors: err.response.data.errors, loading: false })
-        );
-    }
-  };
-
-  render() {
-    const { data, errors, loading } = this.state;
-
-    return (
-      <div>
-        <form onSubmit={this.onSubmit}>
-          <FormButton label="Sign Up" loading={loading} />
-        </form>
-      </div>
-    );
-  }
-}
-
-$1.propTypes = {
-  submit: PropTypes.func.isRequired
-};
-
-export default $1;
-endsnippet
-
-snippet rssub "Redux Saga Form Submit" bA
-onSubmit = e => {
-	e.preventDefault();
-	const errors = this.validate(this.state.data);
-	this.setState({ errors });
-	if (Object.keys(errors).length === 0) {
-		this.props.submit(this.state.data);
-	}
-};
-endsnippet
-
-snippet rscwp "Redux Saga componentWillReceiveProps" bA
-componentWillReceiveProps(nextProps) {
-	this.setState({
-		errors: nextProps.serverErrors
-	});
-}
-endsnippet
-
-snippet rffocus "Redux Form Focus" bA
-componentDidMount() {
-	this.focus();
-}
-
-focus = () => this.${1:fieldname}.focus();
-endsnippet
-
-snippet rsbf "Redux Saga Bootstrap Form" bA
-import React from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import FormButton from "../common/FormButton";
-import { ${2:submitRequestAction} } from "../../actions/${3:actionFile}";
-
-class ${1:`!p snip.rv = re.sub('\.js$', '', fn)`} extends React.Component {
-  state = {
-    data: {},
-    errors: {}
-  };
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      errors: nextProps.serverErrors
-    });
-  }
-
-  validate = data => {
-    const errors = {};
-    return errors;
-  };
-
-  onChangeString = e => {
-    this.setState({
-      data: { ...this.state.data, [e.target.name]: e.target.value }
-    });
-  };
-
-  onSubmit = e => {
-    e.preventDefault();
-    const errors = this.validate(this.state.data);
-    this.setState({ errors });
-    if (Object.keys(errors).length === 0) {
-      this.props.submit(this.state.data);
-    }
-  };
-
-  render() {
-    const { data, errors } = this.state;
-    const { loading } = this.props;
-
-    return (
-      <div>
-        <form onSubmit={this.onSubmit}>
-          <FormButton label="Sign Up" loading={loading} />
-        </form>
-      </div>
-    );
-  }
-}
-
-$1.propTypes = {
-  submit: PropTypes.func.isRequired
-};
-
-function mapStateToProps(state) {
-  return {
-    serverErrors: state.formErrors.${4:serverErrors},
-    loading: state.loading.${5:loading}
-  };
-}
-
-export default connect(mapStateToProps, { submit: $2 })(
-  $1
-);
-endsnippet
-
-snippet fmes "Formatted Message Component" A
-<FormattedMessage id=\"$1\" defaultMessage=\"$2\" />
-endsnippet
-
 snippet ract "Redux action" bA
 export const ${1:action} = payload => ({
   type: ${2:type},
@@ -358,21 +180,197 @@ export const ${1:action} = payload => ({
 });$0
 endsnippet
 
-snippet raset "Redux actions set" bA
-import { ${1:NAME}_REQUEST, $1_SUCCESS, $1_FAILURE } from "../types";
 
-export const ${2:name}Request = payload => ({
-  type: $1_REQUEST,
-  payload
-});
+snippet nreq "Node Require" bA
+const $1 = require('$2');$0
+endsnippet
 
-export const $2Success = payload => ({
-  type: $1_SUCCESS,
-  payload
-});
+snippet kmig "Knex Migration: Create Table" bA
+exports.up = knex => {
+	return knex.schema.createTable("${1:tableName}", t => {
+		t.increments();
 
-export const $2Failure = payload => ({
-  type: $1_FAILURE,
-  payload
-});
+		$0
+
+		t.datetime("createdAt");
+		t.datetime("updatedAt");
+	});
+}
+
+exports.down = knex => knex.schema.dropTable("$1");
+endsnippet
+
+snippet vuexstore "Vuex Store template" bA
+export default {
+  state: {
+    hash: {}
+  },
+
+  getters: {
+    $1(state) {
+      return Object.values(state.hash);
+    }
+  },
+
+  mutations: {
+    ADD_`!p snip.rv = t[1].upper()`(state, payload) {
+      state.hash = { ...state.hash, ...payload };
+    }
+  },
+
+  actions: {}
+};
+endsnippet
+
+snippet obbase "Objection: Base Model" bA
+const { Model } = require("objection");
+
+class BaseModel extends Model {
+  $beforeInsert() {
+    const now = new Date().toISOString();
+    this.createdAt = now;
+    this.updatedAt = now;
+  }
+
+  $beforeUpdate() {
+    this.updatedAt = new Date().toISOString();
+  }
+}
+
+module.exports = BaseModel;
+endsnippet
+
+snippet obmod "Objection: Model" bA
+const BaseModel = require("./BaseModel");
+
+class ${1:`!p snip.rv = snip.basename`} extends BaseModel {
+  static get tableName() {
+		return "${2:`!p snip.rv = t[1][:1].lower() + t[1][1:] + "s"`}";
+  }
+}
+
+module.exports = $1;
+endsnippet
+
+snippet obrel "Objection: Relationships method" bA
+static get relationMappings() {
+  return {
+  };
+}
+endsnippet
+
+snippet "obbelongs (.*)" "Objection: Belongs To Relationship" br
+${1:`!p snip.rv = match.group(1)`}: {
+  relation: BaseModel.BelongsToOneRelation,
+  modelClass: `!p snip.rv = match.group(1)[:1].upper() + match.group(1)[1:]`,
+  join: {
+    from: "`!p snip.rv = snip.basename[:1].lower() + snip.basename[1:] + "s." + match.group(1) + "Id"`",
+    to: "`!p snip.rv = match.group(1) + "s.id"`"
+  }
+}
+endsnippet
+
+snippet "obhasmany (.*)" "Objection: Has Many Relationship" br
+${1:`!p snip.rv = match.group(1)`}: {
+  relation: BaseModel.HasManyRelation,
+  modelClass: `!p snip.rv = match.group(1)[:1].upper() + match.group(1)[1:-1]`,
+  join: {
+    from: "`!p snip.rv = snip.basename[:1].lower() + snip.basename[1:] + "s.id"`",
+    to: "`!p snip.rv = match.group(1) + "." + snip.basename[:1].lower() + snip.basename[1:] + "Id"`"
+  }
+}
+endsnippet
+
+snippet "obmanytomany (.*)" "Objection: Many to Many Relationship" br
+${1:`!p snip.rv = match.group(1)`}: {
+  relation: BaseModel.ManyToManyRelation,
+  modelClass: `!p snip.rv = match.group(1)[:1].upper() + match.group(1)[1:-1]`,
+  join: {
+    from: "`!p snip.rv = snip.basename[:1].lower() + snip.basename[1:] + "s.id"`",
+    through: {
+      from: "${1:joinTable}.`!p snip.rv = snip.basename[:1].lower() + snip.basename[1:] + "Id"`",
+      to: "$1.`!p snip.rv = match.group(1)[:-1] + "Id"`"
+    },
+    to: "`!p snip.rv = match.group(1) + ".id"`"
+  }
+}
+endsnippet
+
+snippet fp "Arrow function" A
+($1) => ${2:\{$0\}}
+endsnippet
+
+snippet fw "Empty arrow function" A
+() => {
+	$0
+}
+endsnippet
+
+snippet "f (\w+)(.*)" "Function without function keyword" br
+`!p snip.rv = match.group(1) + "(" + match.group(2).strip().replace(" ", ", ") + ")"` {
+	$0
+}
+endsnippet
+
+snippet "af (\w+)(.*)" "Function without function keyword" br
+async `!p snip.rv = match.group(1) + "(" + match.group(2).strip().replace(" ", ", ") + ")"` {
+	$0
+}
+endsnippet
+
+snippet "F (\w+)(.*)" "Function without function keyword" br
+`!p snip.rv = "function " + match.group(1) + "(" + match.group(2).strip().replace(" ", ", ") + ")"` {
+	$0
+}
+endsnippet
+
+snippet "a (\w+)(.*)" "Function without function keyword" br
+`!p snip.rv = "const " + match.group(1) + " = (" + match.group(2).strip().replace(" ", ", ") + ") =>"` {
+	$0
+}
+endsnippet
+
+snippet "if (.*)" "If statement" br
+if (`!p snip.rv = match.group(1)`) {
+	$0
+}
+endsnippet
+
+snippet trc "Wrap in try catch block"
+try {
+	${VISUAL}
+} catch(err) {
+	$0
+}
+endsnippet
+
+snippet "-req (\w+) (\S+)" "Require" br
+const `!p snip.rv = match.group(1)` = require("`!p snip.rv = match.group(2)`");$0
+endsnippet
+
+snippet "-imp (\w+) (\S+)" "Import" br
+import `!p snip.rv = match.group(1)` from "`!p snip.rv = match.group(2)`";$0
+endsnippet
+
+snippet "-bimp (\S+) (\S+)" "Import" br
+import { `!p snip.rv = match.group(1)` } from "`!p snip.rv = match.group(2)`";$0
+endsnippet
+
+snippet "pp (\S+) (.*)" "Permitted Params" br
+const `!p snip.rv = match.group(1)`Data = _.pick(req.body.`!p snip.rv = match.group(1)`, ["`!p snip.rv = match.group(2).strip().replace(' ', '", "')`"]);
+endsnippet
+
+snippet rreqa "Import authenticate middleware" bA
+const authenticate = require("../middlewares/authenticate");$0
+endsnippet
+snippet rreql "Import lodash" bA
+const _ = require("lodash");$0
+endsnippet
+
+snippet rval "Validation template" bA
+const errors = {};
+
+$0
+
+return { isValid: Object.keys(errors).length === 0, errors };
 endsnippet

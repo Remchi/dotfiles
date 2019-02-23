@@ -1,0 +1,11 @@
+snippet "-- (\S+) (.*)" "Tag with classes" br
+<`!p snip.rv = match.group(1)` class="`!p snip.rv = match.group(2)`">
+	$0
+</`!p snip.rv = match.group(1)`>
+endsnippet
+
+snippet "-- (\S+)" "Tag without classes" br
+<`!p snip.rv = match.group(1)`>
+	$0
+</`!p snip.rv = match.group(1)`>
+endsnippet

@@ -14,15 +14,15 @@ endsnippet
 
 snippet vbform "Vue Boostrap Form" bA
 <template>
-  <div>
-    <b-form @submit.prevent="submit">
+	<div>
+		<b-form @submit.prevent="submit">
 
-      <form-button :loading="loading" type="primary">
-        Submit
-      </form-button>
+		<form-button :loading="loading" type="primary">
+			Submit
+		</form-button>
 
-    </b-form>
-  </div>
+		</b-form>
+	</div>
 </template>
 
 <script>
@@ -82,16 +82,38 @@ try {
 }
 endsnippet
 
+snippet vfor "Vue For" A
+v-for="${1:item} in $1s" :key="$1.id"$0
+endsnippet
+
+snippet vif "Vue If" A
+v-if="$0"
+endsnippet
+
+snippet cl "Class attribute"
+class="$0"
+endsnippet
+
 snippet vdata "Vue data method" bA
 data() {
   return {
 		$0
   }
-}
+},
+endsnippet
+snippet vmeth "Vue Methods" bA
+methods: {
+	$0
+},
+endsnippet
+snippet vatt "Vue Computed" bA
+computed: {
+	$0
+},
 endsnippet
 
 snippet nimp "Import" bA
-import $1 from '$0$1';
+import $1 from '$2';$0
 endsnippet
 snippet impl "Import lodash" bA
 import _ from 'lodash';
@@ -102,3 +124,64 @@ endsnippet
 snippet impmg "Import mapGetters" bA
 import { mapGetters } from 'vuex';
 endsnippet
+
+
+
+snippet fp "Arrow function" A
+($1) => ${2:\{$0\}}
+endsnippet
+
+snippet fw "Empty arrow function" A
+() => {
+	$0
+}
+endsnippet
+
+snippet "f (\w+)(.*)" "Function without function keyword" br
+`!p snip.rv = match.group(1) + "(" + match.group(2).strip().replace(" ", ", ") + ")"` {
+	$0
+},
+endsnippet
+
+snippet "af (\w+)(.*)" "Function without function keyword" br
+async `!p snip.rv = match.group(1) + "(" + match.group(2).strip().replace(" ", ", ") + ")"` {
+	$0
+}
+endsnippet
+
+snippet "F (\w+)(.*)" "Function with function keyword" br
+`!p snip.rv = "function " + match.group(1) + "(" + match.group(2).strip().replace(" ", ", ") + ")"` {
+	$0
+}
+endsnippet
+
+snippet "a (\w+)(.*)" "Constant arrow function declaration" br
+`!p snip.rv = "const " + match.group(1) + " = (" + match.group(2).strip().replace(" ", ", ") + ") =>"` {
+	$0
+}
+endsnippet
+
+
+snippet "if (.*)" "If statement" br
+if (`!p snip.rv = match.group(1)`) {
+	$0
+}
+endsnippet
+
+snippet trc "Wrap in try catch block"
+try {
+	${VISUAL}
+} catch(err) {
+	$0
+}
+endsnippet
+
+snippet "-imp (\w+) (\S+)" "Import" br
+import `!p snip.rv = match.group(1)` from "`!p snip.rv = match.group(2)`";$0
+endsnippet
+
+snippet "-bimp (\S+) (\S+)" "Import" br
+import { `!p snip.rv = match.group(1)` } from "`!p snip.rv = match.group(2)`";$0
+endsnippet
+
+
