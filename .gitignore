@@ -4,3 +4,4 @@ emacs/*
 !emacs/snippets
 
 vim/bundle/
+.DS_Store
