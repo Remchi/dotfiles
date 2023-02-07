@@ -11,6 +11,10 @@ local luasnip = require("luasnip")
 local cmp = require("cmp")
 
 lsp.setup_nvim_cmp({
+  preselect = 'none',
+  completion = {
+    completeopt = 'menu,menuone,noinsert,noselect'
+  },
 	mapping = {
 		["<Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
